@@ -16,8 +16,7 @@ class CreateTableVoters extends Migration
         Schema::create('voters', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('num_identification')->unique();
-            $table->string('name');
-            $table->string('lastname');
+            $table->string('name',80);
             $table->string('email')->unique();
             $table->string('password');
             $table->boolean('enabled');

@@ -9,7 +9,6 @@ class Voter extends Model
     protected $fillable =  [
         'num_identification',
         'name',
-        'lastname',
         'email',
         'password', // password
         'enabled',

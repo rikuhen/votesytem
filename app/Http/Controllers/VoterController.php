@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class voterController extends Controller
+class VoterController extends Controller
 {
     /**
      * Display a listing of the resource.
