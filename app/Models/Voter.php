@@ -2,10 +2,15 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class Voter extends Model
+class Voter extends Authenticatable
 {
+    protected $hidden = [
+        'password',
+        'remember_token'
+    ];
+
     protected $fillable =  [
         'num_identification',
         'name',

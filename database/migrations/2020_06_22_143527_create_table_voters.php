@@ -19,6 +19,7 @@ class CreateTableVoters extends Migration
             $table->string('name',80);
             $table->string('email')->unique();
             $table->string('password');
+            $table->rememberToken();
             $table->boolean('enabled');
             $table->timestamps();
         });

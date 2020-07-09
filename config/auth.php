@@ -1,5 +1,7 @@
 <?php
 
+use Illuminate\Support\Facades\App;
+
 return [
 
     /*
@@ -70,6 +72,10 @@ return [
             'driver' => 'eloquent',
             'model' => App\Models\User::class,
         ],
+        'voters' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Voter::class
+        ]
 
         // 'users' => [
         //     'driver' => 'database',
