@@ -124,9 +124,9 @@ class LoginVoterController extends Controller
         ->first();
         
         if (!$voter) return false;
-
+        
         $validCredentials = Hash::check($request->get('password'), $voter->getAuthPassword());
-
+        
         if($validCredentials) {
             return $this->guard()->attempt(
                 $this->credentials($request), $request->filled('remember')
