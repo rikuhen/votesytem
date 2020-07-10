@@ -43,10 +43,15 @@ return [
             'provider' => 'users',
         ],
 
-        'api' => [
-            'driver' => 'token',
+        'users-api' => [
+            'driver' => 'passport',
             'provider' => 'users',
             //'hash' => false,
+        ],
+
+        'voters-api' => [
+            'driver' => 'passport',
+            'provider' => 'voters',
         ],
     ],
 
@@ -105,6 +110,13 @@ return [
             'expire' => 60,
             'throttle' => 60,
         ],
+
+        'voters' => [
+            'provider' => 'voters',
+            'table' => 'password_resets',
+            'expire' => 15,
+            'throttle' => 15,
+        ]
     ],
 
     /*
