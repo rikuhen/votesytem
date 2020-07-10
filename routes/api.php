@@ -18,3 +18,4 @@ use Illuminate\Http\Request;
 // });
 
 Route::post('login-voters', 'Auth\LoginVoterController@login');
+Route::post('login-users', 'Auth\LoginUserController@login');
