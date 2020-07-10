@@ -4,11 +4,14 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Http\Resources\VoterResource;
+use App\Models\Voter;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 use Auth;
 use Illuminate\Support\Facades\Auth as FacadesAuth;
+use Illuminate\Support\Facades\Hash;
+
 
 class LoginVoterController extends Controller
 {
@@ -108,13 +111,29 @@ class LoginVoterController extends Controller
     }
 
      /**
-     * Get the guard to be used during authentication.
+     * Attempt to log the user into the application.
      *
-     * @return \Illuminate\Contracts\Auth\StatefulGuard
+     * @param  \Illuminate\Http\Request  $request
+     * @return bool
      */
-    protected function guard()
+    protected function attemptLogin(Request $request)
     {
-        return Auth::guard('voters-api');
+        $password = Hash::make($request->get('password'));
+        $voter = Voter::where($this->username(),$request->get($this->username()))
+        ->where('enabled', '1')
+        ->first();
+        
+        if (!$voter) return false;
+
+        $validCredentials = Hash::check($request->get('password'), $voter->getAuthPassword());
+
+        if($validCredentials) {
+            return $this->guard()->attempt(
+                $this->credentials($request), $request->filled('remember')
+            );
+        }
+
+        return false;
     }
 
 

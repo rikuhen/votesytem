@@ -12,6 +12,7 @@ class UsersTableSeeder extends Seeder
      */
     public function run()
     {
+        $password = Hash::make('password');
         //Admin
         User::create([
             'num_identification' => '0926894544',
@@ -20,7 +21,7 @@ class UsersTableSeeder extends Seeder
             'role' => 'admin',
             'enabled' => 1,
             'email' => 'info@thejlmedia.com',
-            'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
+            'password' => $password, // password
             'remember_token' => Str::random(10),
         ]);
 
@@ -32,7 +33,7 @@ class UsersTableSeeder extends Seeder
             'role' => 'supervisor',
             'enabled' => 1,
             'email' => 'veedor_min@mail.com',
-            'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
+            'password' => $password, // password
             'remember_token' => Str::random(10),
         ]);
 
@@ -44,7 +45,7 @@ class UsersTableSeeder extends Seeder
             'role' => 'supervisor',
             'enabled' => 1,
             'email' => 'veedor_cne@mail.com',
-            'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
+            'password' => $password, // password
             'remember_token' => Str::random(10),
         ]);
     }

@@ -43,15 +43,10 @@ return [
             'provider' => 'users',
         ],
 
-        'users-api' => [
+        'api' => [
             'driver' => 'passport',
             'provider' => 'users',
             //'hash' => false,
-        ],
-
-        'voters-api' => [
-            'driver' => 'passport',
-            'provider' => 'voters',
         ],
     ],
 
@@ -75,13 +70,8 @@ return [
     'providers' => [
         'users' => [
             'driver' => 'eloquent',
-            'model' => App\Models\User::class,
+            'model' => \App\Models\User::class,
         ],
-        'voters' => [
-            'driver' => 'eloquent',
-            'model' => App\Models\Voter::class
-        ]
-
         // 'users' => [
         //     'driver' => 'database',
         //     'table' => 'users',
@@ -109,14 +99,7 @@ return [
             'table' => 'password_resets',
             'expire' => 60,
             'throttle' => 60,
-        ],
-
-        'voters' => [
-            'provider' => 'voters',
-            'table' => 'password_resets',
-            'expire' => 15,
-            'throttle' => 15,
-        ]
+        ], 
     ],
 
     /*
