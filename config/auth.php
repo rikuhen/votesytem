@@ -48,6 +48,12 @@ return [
             'provider' => 'users',
             //'hash' => false,
         ],
+
+        'api-voters' => [
+            'driver' => 'session',
+            'provider' => 'voters',
+            //'hash' => false,
+        ],
     ],
 
     /*
@@ -71,6 +77,11 @@ return [
         'users' => [
             'driver' => 'eloquent',
             'model' => \App\Models\User::class,
+        ],
+
+        'voters' => [
+            'driver' => 'eloquent',
+            'model' => \App\Models\Voter::class,
         ],
         // 'users' => [
         //     'driver' => 'database',
@@ -99,7 +110,7 @@ return [
             'table' => 'password_resets',
             'expire' => 60,
             'throttle' => 60,
-        ], 
+        ],
     ],
 
     /*

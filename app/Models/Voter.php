@@ -4,13 +4,20 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Scope;
 use Illuminate\Database\Eloquent\Builder;
+use Laravel\Passport\HasApiTokens;
+use Illuminate\Notifications\Notifiable;
 
 class Voter extends User
 {
-    
+
+    use HasApiTokens, Notifiable;
+
+    protected $guard = "api-voters";
+
     protected $table = "users";
-    
-    protected static function boot() {
+
+    protected static function boot()
+    {
         parent::boot();
 
         static::addGlobalScope('role', function (Builder $builder) {

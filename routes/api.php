@@ -20,7 +20,7 @@ use Illuminate\Http\Request;
 Route::post('login-voters', 'Auth\LoginVoterController@login');
 Route::post('login-users', 'Auth\LoginUserController@login');
 
-Route::middleware(['auth:api'])->group(function () { 
+Route::middleware(['auth:api'])->group(function () {
     Route::resource('candidates', 'CandidateController');
     Route::post('vote','VoteController@store');
 });

@@ -96,7 +96,7 @@ class LoginUserController extends Controller
 
     public function logout(Request $request)
     {
-        $logout = $request->voter()->token()->revoke();
+        $logout = $request->user()->token()->revoke();
         return response()->json(['message' => 'Usuario fuera'],200);
     }
 
@@ -122,7 +122,7 @@ class LoginUserController extends Controller
         $user = User::where($this->username(),$request->get($this->username()))
         ->where('enabled', '1')
         ->first();
-        
+
         if (!$user) return false;
 
         $validCredentials = Hash::check($request->get('password'), $user->getAuthPassword());
