@@ -2,20 +2,19 @@
 
 namespace App\Models;
 
-use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Database\Eloquent\Scope;
+use Illuminate\Database\Eloquent\Builder;
 
-class Voter extends Authenticatable
+class Voter extends User
 {
-    protected $hidden = [
-        'password',
-        'remember_token'
-    ];
+    
+    protected $table = "users";
+    
+    protected static function boot() {
+        parent::boot();
 
-    protected $fillable =  [
-        'num_identification',
-        'name',
-        'email',
-        'password', // password
-        'enabled',
-    ];
+        static::addGlobalScope('role', function (Builder $builder) {
+            $builder->where('role', '=', 'voter');
+        });
+    }
 }
