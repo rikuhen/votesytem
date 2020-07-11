@@ -12,7 +12,7 @@ export const store = new Vuex.Store({
         layout: 'auth-layout',
         token: localStorage.getItem('token') || null,
         user: {},
-        menus: [],
+        menus: localStorage.getItem('menu'),
         routes: []
     },
     mutations: {
@@ -31,11 +31,14 @@ export const store = new Vuex.Store({
         REMOVE_USER(state) {
             state.user = null
         },
+        SET_MENUS(state, role) {
+            state.menus = role
+        },
         GET_MENUS(state, menus) {
             state.menus = menus
         },
         REMOVE_MENUS(state, menus) {
-            state.menus = [];
+            state.menus = ''
         },
         SET_ROUTES(state, routes) {
             state.routes = routes
@@ -101,6 +104,7 @@ export const store = new Vuex.Store({
                         .then(response => {
                             //console.log(response)
                             localStorage.removeItem('token')
+                            localStorage.removeItem('menu')
                             context.commit('DESTROYTOKEN')
                             context.commit('REMOVE_USER')
                             context.commit('REMOVE_MENUS')
@@ -119,25 +123,5 @@ export const store = new Vuex.Store({
 
             }
         },
-        // async getMenus(context) {
-        //     if (context.getters.loggedIn) {
-        //         const menus = await axios.get("/api/menus", {
-        //             headers: { Authorization: "Bearer " + context.state.token }
-        //         });
-        //         context.dispatch('getRoutes');
-        //         return menus.data.data;
-        //     }
-        // },
-
-        // async getRoutes(context) {
-        //     if (context.getters.loggedIn) {
-        //         const promise = await axios.get("/api/app-routes", {
-        //             headers: { Authorization: "Bearer " + context.state.token }
-        //         });
-
-        //         let routes = promise.data.data.map(route => route.route_name);
-        //         context.commit("SET_ROUTES",routes);
-        //     }
-        // }
     }
 })

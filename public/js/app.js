@@ -177,6 +177,10 @@ __webpack_require__.r(__webpack_exports__);
       promise.then(function (response) {
         _this.$store.commit("SET_LAYOUT", "app-layout");
 
+        localStorage.setItem("menu", "voter");
+
+        _this.$store.commit("SET_MENUS", "voter");
+
         _this.$router.push({
           name: "vote"
         });
@@ -492,22 +496,39 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "NavbarMenuComponent",
   data: function data() {
     return {
-      menus: [],
+      menuRole: "",
       isActive: null,
       showMobileMenu: false
     };
   },
   methods: {},
-  created: function created() {// this.$store.dispatch("getMenus").then(result => (this.menus = result));
+  created: function created() {
+    this.menuRole = this.$store.getters.getMenus;
   },
   mounted: function mounted() {
     var _this = this;
 
-    this.$root.$on('toggle-mobile-menu', function (value) {
+    this.$root.$on("toggle-mobile-menu", function (value) {
       return _this.showMobileMenu = value;
     });
   }
@@ -627,7 +648,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/c
 
 
 // module
-exports.push([module.i, "", ""]);
+exports.push([module.i, ".pcoded[theme-layout=horizontal] .pcoded-container {\n  position: relative;\n}\n.pcoded[theme-layout=horizontal] .pcoded-header {\n  z-index: 1024;\n}\n.pcoded[theme-layout=horizontal] .pcoded-navbar {\n  display: block;\n  height: 50px;\n  width: 100%;\n  z-index: 1023;\n  box-shadow: 0 2px 7px -3px rgba(0, 0, 0, 0.4);\n}\n.pcoded[theme-layout=horizontal] .pcoded-navbar .pcoded-item .pcoded-hasmenu.pcoded-trigger > .pcoded-submenu {\n  opacity: 1;\n  visibility: visible;\n  transform: rotateX(0deg);\n}\n.pcoded[theme-layout=horizontal] .pcoded-navbar li.pcoded-hasmenu > a:after {\n  right: 3px;\n  top: -3px;\n}\n.pcoded[theme-layout=horizontal] #styleSelector {\n  z-index: 1024;\n}\n.pcoded[theme-layout=horizontal] .page-header {\n  margin-top: 80px;\n}\n.pcoded[theme-layout=horizontal][pcoded-device-type=phone] .p-chat-user,\n.pcoded[theme-layout=horizontal][pcoded-device-type=phone] .showChat_inner, .pcoded[theme-layout=horizontal][pcoded-device-type=tablet] .p-chat-user,\n.pcoded[theme-layout=horizontal][pcoded-device-type=tablet] .showChat_inner {\n  top: 107px;\n}\n.pcoded[theme-layout=horizontal][pcoded-device-type=phone] .page-header, .pcoded[theme-layout=horizontal][pcoded-device-type=tablet] .page-header {\n  padding-top: 0;\n}\n.pcoded[theme-layout=horizontal][pcoded-device-type=phone] .pcoded-navbar[pcoded-navbar-position=absolute], .pcoded[theme-layout=horizontal][pcoded-device-type=tablet] .pcoded-navbar[pcoded-navbar-position=absolute] {\n  top: 70px;\n}\n.pcoded[theme-layout=horizontal][pcoded-device-type=desktop] .navbar-logo .mobile-menu,\n.pcoded[theme-layout=horizontal][pcoded-device-type=desktop] .pcoded-brand .menu-toggle {\n  display: none;\n}\n.pcoded[theme-layout=horizontal] .pcoded-navbar .pcoded-item[item-border=true][item-border-style=dashed] > li > a {\n  border-right-style: dashed;\n}\n.pcoded[theme-layout=horizontal] .pcoded-navbar .pcoded-item[item-border=true][item-border-style=dotted] > li > a {\n  border-right-style: dotted;\n}\n.pcoded[theme-layout=horizontal] .pcoded-navbar .pcoded-item[item-border=true][item-border-style=solid] > li > a {\n  border-right-style: solid;\n}\n.pcoded[theme-layout=horizontal] .pcoded-navbar .pcoded-item[item-border=true][item-border-style=dashed] .pcoded-hasmenu .pcoded-submenu li > a {\n  border-bottom-style: dashed;\n}\n.pcoded[theme-layout=horizontal] .pcoded-navbar .pcoded-item[item-border=true][item-border-style=dotted] .pcoded-hasmenu .pcoded-submenu li > a {\n  border-bottom-style: dotted;\n}\n.pcoded[theme-layout=horizontal] .pcoded-navbar .pcoded-item[item-border=true][item-border-style=solid] .pcoded-hasmenu .pcoded-submenu li > a {\n  border-bottom-style: solid;\n}\n.pcoded[theme-layout=horizontal] .pcoded-navbar .pcoded-item[item-border=false] > li > a {\n  border-right-width: 0;\n}\n.pcoded[theme-layout=horizontal] .pcoded-navbar .pcoded-item[item-border=true] > li > a {\n  border-right-width: 1px;\n}\n.pcoded[theme-layout=horizontal] .pcoded-navbar .pcoded-item[subitem-border=false] .pcoded-hasmenu .pcoded-submenu li > a {\n  border-bottom-width: 0;\n}\n.pcoded[theme-layout=horizontal] .pcoded-navbar .pcoded-item[subitem-border=true] .pcoded-hasmenu .pcoded-submenu li > a {\n  border-bottom-width: 1px;\n}\n.pcoded[theme-layout=horizontal] .pcoded-navbar .pcoded-item {\n  display: block;\n  list-style: none;\n  margin: 0;\n  padding: 0;\n  position: relative;\n}\n.pcoded[theme-layout=horizontal] .pcoded-navbar .pcoded-item > li {\n  display: block;\n  list-style: outside none none;\n  margin: 0;\n  padding: 5px;\n  position: relative;\n}\n.pcoded[theme-layout=horizontal] .pcoded-navbar .pcoded-item > li > a {\n  display: block;\n  font-size: 13px;\n  padding: 5px 20px;\n  text-decoration: none;\n  position: relative;\n}\n@media only screen and (max-width: 1200px) and (min-width: 992px) {\n.pcoded[theme-layout=horizontal] .pcoded-navbar .pcoded-item > li > a {\n    padding: 5px;\n}\n}\n.pcoded[theme-layout=horizontal] .pcoded-navbar .pcoded-item > li.pcoded-hasmenu > a {\n  line-height: 1.85;\n}\n.pcoded[theme-layout=horizontal] .pcoded-navbar .pcoded-item .pcoded-hasmenu .pcoded-submenu {\n  list-style: outside none none;\n  margin: 0;\n  padding: 5px 0;\n  box-shadow: 0 1px 7px -1px rgba(0, 0, 0, 0.4);\n}\n.pcoded[theme-layout=horizontal] .pcoded-navbar .pcoded-item .pcoded-hasmenu .pcoded-submenu li {\n  display: block;\n  list-style: outside none none;\n  margin: 0;\n  padding: 3px 10px;\n  position: relative;\n}\n.pcoded[theme-layout=horizontal] .pcoded-navbar .pcoded-item .pcoded-hasmenu .pcoded-submenu li > a {\n  display: block;\n  font-size: 14px;\n  padding: 7px 10px;\n  text-decoration: none;\n  position: relative;\n}\n.pcoded[theme-layout=horizontal] .pcoded-navbar .pcoded-item .pcoded-hasmenu .pcoded-submenu li > a:after {\n  padding-top: 7px;\n  line-height: 1;\n}\n.pcoded[theme-layout=horizontal] .pcoded-navbar .pcoded-item > li > a > .pcoded-micon {\n  font-size: 14px;\n  padding: 0;\n}\n.pcoded[theme-layout=horizontal] .pcoded-navbar .pcoded-item.pcoded-search-item > li > a > .pcoded-micon {\n  padding: 0 5px 0 7px;\n}\n.pcoded[theme-layout=horizontal] .pcoded-navbar .pcoded-item .pcoded-hasmenu .pcoded-submenu li > a .pcoded-micon {\n  font-size: 13px;\n  padding-right: 5px;\n}\n.pcoded[theme-layout=horizontal][horizontal-layout=widebox] .pcoded-container {\n  width: 100%;\n}\n.pcoded[theme-layout=horizontal][horizontal-layout=widebox] .pcoded-content .pcoded-wrapper,\n.pcoded[theme-layout=horizontal][horizontal-layout=widebox] .pcoded-header .pcoded-wrapper,\n.pcoded[theme-layout=horizontal][horizontal-layout=widebox] .pcoded-navbar .pcoded-wrapper {\n  display: block;\n  margin: 0 auto;\n  max-width: 1200px;\n  width: 100%;\n}\n.pcoded[theme-layout=horizontal] .pcoded-navbar .pcoded-item > li {\n  float: left;\n  padding: 5px 10px;\n}\n.pcoded[theme-layout=horizontal] .pcoded-navbar .pcoded-item li a {\n  transition: all 0.3s ease-in-out;\n}\n.pcoded[theme-layout=horizontal] .pcoded-navbar .pcoded-item .pcoded-hasmenu .pcoded-submenu {\n  position: absolute;\n  min-width: 200px;\n  z-index: 1;\n  border-top-width: 0;\n  top: 100%;\n}\n.pcoded[theme-layout=horizontal] .pcoded-navbar .pcoded-item .pcoded-hasmenu .pcoded-submenu li > a {\n  font-size: 14px;\n  font-weight: 500;\n  text-align: left;\n}\n.pcoded[theme-layout=horizontal] .pcoded-navbar .pcoded-item .pcoded-hasmenu .pcoded-submenu li > a > .pcoded-mtext {\n  transition: all 0s ease-in-out;\n}\n.pcoded[theme-layout=horizontal] .pcoded-navbar .pcoded-item .pcoded-hasmenu .pcoded-submenu li > a > .pcoded-mtext:before {\n  transition: all 0s ease-in-out;\n}\n.pcoded[theme-layout=horizontal] .pcoded-navbar .pcoded-item .pcoded-submenu .pcoded-submenu {\n  position: absolute;\n  min-width: 250px;\n  z-index: 1;\n  left: 100%;\n  top: -1px;\n}\n.pcoded[theme-layout=horizontal] .pcoded-navbar .pcoded-item .pcoded-hasmenu .pcoded-submenu {\n  opacity: 0;\n  visibility: hidden;\n  transform-origin: 50% 50%;\n  transition: transform 0.3s, opacity 0.3s;\n  transform-style: preserve-3d;\n  transform: rotateX(-90deg);\n}\n.pcoded[theme-layout=horizontal] .pcoded-navbar .pcoded-item .pcoded-submenu li.pcoded-hasmenu > a:after {\n  margin-left: 3px;\n  position: relative;\n  float: right;\n  top: -3px;\n}\n.pcoded[theme-layout=horizontal] .pcoded-navbar .pcoded-item > li.pcoded-hasmenu > a:after, .pcoded[theme-layout=horizontal] .pcoded-navbar .pcoded-item > li.pcoded-hasmenu.active > a:after, .pcoded[theme-layout=horizontal] .pcoded-navbar .pcoded-item > li.pcoded-hasmenu.pcoded-trigger > a:after {\n  font-style: normal;\n  margin-left: 3px;\n  padding-left: 5px;\n  position: relative;\n}\n.pcoded[theme-layout=horizontal] .pcoded-navbar .pcoded-item > .pcoded-hasmenu.edge.pcoded-trigger > .pcoded-submenu {\n  right: 0;\n}\n.pcoded[theme-layout=horizontal][horizontal-placement=top] .pcoded-navbar .pcoded-item > li.pcoded-hasmenu.pcoded-trigger.active .pcoded-submenu {\n  border-top-style: solid;\n  border-top-width: 1px;\n}\n.pcoded[theme-layout=horizontal] .pcoded-navbar .pcoded-item[subitem-border=true] .pcoded-hasmenu .pcoded-submenu > li:last-child > a {\n  border-bottom-color: transparent;\n}\n.pcoded[theme-layout=horizontal][pcoded-device-type=tablet] .pcoded-navbar .pcoded-item.pcoded-search-item > li > a > .pcoded-micon {\n  display: block;\n}\n.pcoded[theme-layout=horizontal][pcoded-device-type=desktop] .pcoded-navbar .pcoded-inner-navbar, .pcoded[theme-layout=horizontal][pcoded-device-type=tablet] .pcoded-navbar .pcoded-inner-navbar {\n  position: relative;\n}\n.pcoded[theme-layout=horizontal][pcoded-device-type=tablet] .pcoded-navbar, .pcoded[theme-layout=horizontal][pcoded-device-type=phone] .pcoded-navbar {\n  height: auto;\n  padding: 10px 10px 0;\n  position: absolute;\n  opacity: 0;\n  visibility: hidden;\n  transform-origin: 50% 50%;\n  transition: transform 0.3s, opacity 0.3s;\n  transform-style: preserve-3d;\n  transform: rotateX(-90deg);\n}\n.pcoded[theme-layout=horizontal][pcoded-device-type=tablet] .pcoded-navbar .pcoded-inner-navbar, .pcoded[theme-layout=horizontal][pcoded-device-type=phone] .pcoded-navbar .pcoded-inner-navbar {\n  height: auto;\n  position: relative;\n}\n.pcoded[theme-layout=horizontal][pcoded-device-type=tablet] .pcoded-navbar.show-menu, .pcoded[theme-layout=horizontal][pcoded-device-type=phone] .pcoded-navbar.show-menu {\n  opacity: 1;\n  visibility: visible;\n  transform: rotateX(0deg);\n}\n.pcoded[theme-layout=horizontal][pcoded-device-type=tablet] .pcoded-navbar .pcoded-item, .pcoded[theme-layout=horizontal][pcoded-device-type=phone] .pcoded-navbar .pcoded-item {\n  display: block;\n  float: none;\n  position: relative;\n  width: 100%;\n  z-index: 1;\n}\n.pcoded[theme-layout=horizontal][pcoded-device-type=tablet] .pcoded-navbar .pcoded-item > li, .pcoded[theme-layout=horizontal][pcoded-device-type=phone] .pcoded-navbar .pcoded-item > li {\n  float: none;\n  display: block;\n  position: relative;\n}\n.pcoded[theme-layout=horizontal][pcoded-device-type=tablet] .pcoded-navbar .pcoded-item[item-border=true] > li > a, .pcoded[theme-layout=horizontal][pcoded-device-type=phone] .pcoded-navbar .pcoded-item[item-border=true] > li > a {\n  border-right-width: 0;\n  border-bottom-width: 1px;\n  border-bottom-style: solid;\n}\n.pcoded[theme-layout=horizontal][pcoded-device-type=tablet] .pcoded-navbar .pcoded-item[item-border=true] > li.pcoded-trigger > a, .pcoded[theme-layout=horizontal][pcoded-device-type=phone] .pcoded-navbar .pcoded-item[item-border=true] > li.pcoded-trigger > a {\n  border-bottom-width: 0;\n}\n.pcoded[theme-layout=horizontal][pcoded-device-type=tablet] .pcoded-navbar .pcoded-item > .pcoded-hasmenu > .pcoded-submenu, .pcoded[theme-layout=horizontal][pcoded-device-type=phone] .pcoded-navbar .pcoded-item > .pcoded-hasmenu > .pcoded-submenu {\n  min-width: 100%;\n  z-index: 2;\n}\n.pcoded[theme-layout=horizontal][pcoded-device-type=tablet] .pcoded-navbar .pcoded-item > .pcoded-hasmenu.pcoded-trigger > .pcoded-submenu, .pcoded[theme-layout=horizontal][pcoded-device-type=phone] .pcoded-navbar .pcoded-item > .pcoded-hasmenu.pcoded-trigger > .pcoded-submenu {\n  position: relative;\n}\n.pcoded[theme-layout=horizontal][pcoded-device-type=tablet] .pcoded-navbar .pcoded-item > .pcoded-hasmenu > .pcoded-submenu > .pcoded-hasmenu > .pcoded-submenu, .pcoded[theme-layout=horizontal][pcoded-device-type=phone] .pcoded-navbar .pcoded-item > .pcoded-hasmenu > .pcoded-submenu > .pcoded-hasmenu > .pcoded-submenu {\n  left: 0;\n  min-width: 100%;\n  right: 0;\n  top: 0;\n  z-index: 1;\n}\n.pcoded[theme-layout=horizontal][pcoded-device-type=tablet] .pcoded-navbar .pcoded-item > .pcoded-hasmenu > .pcoded-submenu > .pcoded-hasmenu.pcoded-trigger > .pcoded-submenu,\n.pcoded[theme-layout=horizontal][pcoded-device-type=tablet] .pcoded-navbar .pcoded-item > .pcoded-hasmenu > .pcoded-submenu > .pcoded-hasmenu.pcoded-trigger > .pcoded-submenu > .pcoded-hasmenu.pcoded-trigger > .pcoded-submenu, .pcoded[theme-layout=horizontal][pcoded-device-type=phone] .pcoded-navbar .pcoded-item > .pcoded-hasmenu > .pcoded-submenu > .pcoded-hasmenu.pcoded-trigger > .pcoded-submenu,\n.pcoded[theme-layout=horizontal][pcoded-device-type=phone] .pcoded-navbar .pcoded-item > .pcoded-hasmenu > .pcoded-submenu > .pcoded-hasmenu.pcoded-trigger > .pcoded-submenu > .pcoded-hasmenu.pcoded-trigger > .pcoded-submenu {\n  position: relative;\n}\n.pcoded[theme-layout=horizontal][pcoded-device-type=tablet] .pcoded-navbar .pcoded-item > .pcoded-hasmenu > .pcoded-submenu > .pcoded-hasmenu > .pcoded-submenu > .pcoded-hasmenu > .pcoded-submenu, .pcoded[theme-layout=horizontal][pcoded-device-type=phone] .pcoded-navbar .pcoded-item > .pcoded-hasmenu > .pcoded-submenu > .pcoded-hasmenu > .pcoded-submenu > .pcoded-hasmenu > .pcoded-submenu {\n  left: 0;\n  min-width: 100%;\n  right: 0;\n  top: 0;\n  z-index: 1;\n}\n.pcoded[theme-layout=horizontal][pcoded-device-type=tablet][horizontal-placement=bottom] .pcoded-navbar, .pcoded[theme-layout=horizontal][pcoded-device-type=phone][horizontal-placement=bottom] .pcoded-navbar {\n  bottom: auto;\n}\n.pcoded[theme-layout=horizontal][pcoded-device-type=tablet] .pcoded-navbar .pcoded-item > li.pcoded-hasmenu > a:after, .pcoded[theme-layout=horizontal][pcoded-device-type=tablet] .pcoded-navbar .pcoded-item > li.pcoded-hasmenu.active > a:after, .pcoded[theme-layout=horizontal][pcoded-device-type=tablet] .pcoded-navbar .pcoded-item > li.pcoded-hasmenu.pcoded-trigger > a:after, .pcoded[theme-layout=horizontal][pcoded-device-type=phone] .pcoded-navbar .pcoded-item > li.pcoded-hasmenu > a:after, .pcoded[theme-layout=horizontal][pcoded-device-type=phone] .pcoded-navbar .pcoded-item > li.pcoded-hasmenu.active > a:after, .pcoded[theme-layout=horizontal][pcoded-device-type=phone] .pcoded-navbar .pcoded-item > li.pcoded-hasmenu.pcoded-trigger > a:after {\n  position: absolute;\n  right: 13px;\n}\n.pcoded[theme-layout=horizontal][pcoded-device-type=phone] .pcoded-header, .pcoded[theme-layout=horizontal][pcoded-device-type=tablet] .pcoded-header {\n  height: auto;\n  padding-top: 0;\n}\n.pcoded[theme-layout=horizontal][pcoded-device-type=phone] .pcoded-navbar .pcoded-item .pcoded-hasmenu .pcoded-submenu, .pcoded[theme-layout=horizontal][pcoded-device-type=tablet] .pcoded-navbar .pcoded-item .pcoded-hasmenu .pcoded-submenu {\n  border-top: none;\n  margin: 15px auto;\n  min-width: 90%;\n  width: 90%;\n  box-shadow: none;\n}\n.pcoded[theme-layout=horizontal][pcoded-device-type=phone] .pcoded-navbar .pcoded-item .pcoded-hasmenu .pcoded-submenu .pcoded-hasmenu .pcoded-submenu, .pcoded[theme-layout=horizontal][pcoded-device-type=tablet] .pcoded-navbar .pcoded-item .pcoded-hasmenu .pcoded-submenu .pcoded-hasmenu .pcoded-submenu {\n  min-width: 90%;\n  width: 90%;\n}\n.pcoded[theme-layout=horizontal][pcoded-device-type=phone] .pcoded-navbar .pcoded-item .pcoded-hasmenu .pcoded-submenu .pcoded-hasmenu .pcoded-submenu .pcoded-hasmenu .pcoded-submenu, .pcoded[theme-layout=horizontal][pcoded-device-type=tablet] .pcoded-navbar .pcoded-item .pcoded-hasmenu .pcoded-submenu .pcoded-hasmenu .pcoded-submenu .pcoded-hasmenu .pcoded-submenu {\n  min-width: 90%;\n}\n.pcoded[theme-layout=horizontal] .pcoded-header[pcoded-header-position=relative] ~ .pcoded-main-container {\n  top: -1px;\n}\n.pcoded .pcoded-navbar .pcoded-item .pcoded-submenu > li a .pcoded-badge {\n  top: 7px;\n  right: 20px;\n}\n.pcoded .pcoded-navbar .pcoded-item .pcoded-hasmenu.edge > .pcoded-submenu {\n  left: auto;\n  right: 100%;\n}\n.pcoded-main-container {\n  clear: both;\n}\n.pcoded .pcoded-navbar .pcoded-item:after {\n  display: none;\n}\nbody.horizontal-icon .pcoded[theme-layout=horizontal] .page-header, body.horizontal-icon-fixed .pcoded[theme-layout=horizontal] .page-header {\n  margin-top: 110px;\n}\nbody.horizontal-icon .pcoded[pcoded-device-type=phone][theme-layout=horizontal] .page-header, body.horizontal-icon .pcoded[pcoded-device-type=tablet][theme-layout=horizontal] .page-header, body.horizontal-icon-fixed .pcoded[pcoded-device-type=phone][theme-layout=horizontal] .page-header, body.horizontal-icon-fixed .pcoded[pcoded-device-type=tablet][theme-layout=horizontal] .page-header {\n  padding-top: 10px;\n}\nbody.horizontal-icon .pcoded .pcoded-navbar, body.horizontal-icon-fixed .pcoded .pcoded-navbar {\n  height: 80px;\n}\nbody.horizontal-icon .pcoded .pcoded-navbar .pcoded-item > li > a > .pcoded-micon, body.horizontal-icon-fixed .pcoded .pcoded-navbar .pcoded-item > li > a > .pcoded-micon {\n  display: block;\n  text-align: center;\n  margin: 0 auto;\n}\nbody.horizontal-icon .pcoded .pcoded-navbar .pcoded-item > li.pcoded-hasmenu > a, body.horizontal-icon-fixed .pcoded .pcoded-navbar .pcoded-item > li.pcoded-hasmenu > a {\n  line-height: 30px;\n}\nbody.horizontal-icon .pcoded[pcoded-device-type=desktop] .pcoded-navbar .pcoded-item > li.pcoded-hasmenu > a, body.horizontal-icon-fixed .pcoded[pcoded-device-type=desktop] .pcoded-navbar .pcoded-item > li.pcoded-hasmenu > a {\n  height: 70px;\n}", ""]);
 
 // exports
 
@@ -646,7 +667,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n.login-logo-img[data-v-02c6bd38] {\n  width: 8%;\n}\n\n", ""]);
+exports.push([module.i, "\n.login-logo-img[data-v-02c6bd38] {\n  width: 8%;\n}\n", ""]);
 
 // exports
 
@@ -9256,107 +9277,41 @@ var render = function() {
               "subitem-border": "true"
             }
           },
-          _vm._l(_vm.menus, function(menu, index) {
-            return _c(
-              "b-link",
-              {
-                key: menu.id,
-                staticClass: "is-hover",
-                class: {
-                  "pcoded-hasmenu": menu.children.length > 0,
-                  "pcoded-trigger": _vm.isActive == index
-                },
-                attrs: {
-                  to: { name: menu.route ? menu.route : "#" },
-                  "router-tag": "li",
-                  "subitem-icon": "style1",
-                  "dropdown-icon": "style1"
-                },
-                on: {
-                  mouseover: function($event) {
-                    menu.children.length > 0
-                      ? (_vm.isActive = index)
-                      : (_vm.isActive = null)
+          [
+            _vm.menuRole == "voter"
+              ? _c(
+                  "b-link",
+                  {
+                    staticClass: "is-hover pcoded-trigger",
+                    attrs: {
+                      "router-tag": "li",
+                      "subitem-icon": "style1",
+                      "dropdown-icon": "style1",
+                      to: { name: "vote" }
+                    }
                   },
-                  mouseleave: function($event) {
-                    _vm.isActive = null
-                  }
-                }
-              },
-              [
-                _c(
-                  "a",
-                  { staticClass: "waves-effect waves-dark" },
                   [
-                    _c(
-                      "span",
-                      { staticClass: "pcoded-micon" },
-                      [
-                        _c("feather", {
-                          staticClass: "icon-sidebar",
-                          attrs: { type: menu.icon, size: "14" }
-                        })
-                      ],
-                      1
-                    ),
-                    _vm._v(" "),
-                    _c("span", { staticClass: "pcoded-mtext" }, [
-                      _vm._v(_vm._s(menu.name))
-                    ]),
-                    _vm._v(" "),
-                    menu.children.length > 0
-                      ? _c("feather", {
-                          attrs: {
-                            type:
-                              _vm.isActive == index
-                                ? "chevron-down"
-                                : "chevron-right",
-                            size: "12"
-                          }
-                        })
-                      : _vm._e()
-                  ],
-                  1
-                ),
-                _vm._v(" "),
-                menu.children.length > 0
-                  ? _c(
-                      "ul",
-                      { staticClass: "pcoded-submenu" },
-                      _vm._l(menu.children, function(children) {
-                        return _c(
-                          "b-link",
-                          {
-                            key: children.id,
-                            attrs: {
-                              "router-tag": "li",
-                              to: { name: children.route_name }
-                            }
-                          },
-                          [
-                            _c(
-                              "a",
-                              { staticClass: "waves-effect waves-dark" },
-                              [
-                                _c("feather", {
-                                  attrs: { type: "chevron-right", size: "12" }
-                                }),
-                                _vm._v(" "),
-                                _c("span", { staticClass: "pcoded-mtext" }, [
-                                  _vm._v(_vm._s(children.name))
-                                ])
-                              ],
-                              1
-                            )
-                          ]
-                        )
-                      }),
-                      1
-                    )
-                  : _vm._e()
-              ]
-            )
-          }),
+                    _c("a", { staticClass: "waves-effect waves-dark" }, [
+                      _c(
+                        "span",
+                        { staticClass: "pcoded-micon" },
+                        [
+                          _c("feather", {
+                            staticClass: "icon-sidebar",
+                            attrs: { type: "edit", size: "14" }
+                          })
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c("span", { staticClass: "pcoded-mtext" }, [
+                        _vm._v("Votar")
+                      ])
+                    ])
+                  ]
+                )
+              : _vm._e()
+          ],
           1
         )
       ])
@@ -14849,7 +14804,7 @@ var store = new vuex__WEBPACK_IMPORTED_MODULE_1__["default"].Store({
     layout: 'auth-layout',
     token: localStorage.getItem('token') || null,
     user: {},
-    menus: [],
+    menus: localStorage.getItem('menu'),
     routes: []
   },
   mutations: {
@@ -14868,11 +14823,14 @@ var store = new vuex__WEBPACK_IMPORTED_MODULE_1__["default"].Store({
     REMOVE_USER: function REMOVE_USER(state) {
       state.user = null;
     },
+    SET_MENUS: function SET_MENUS(state, role) {
+      state.menus = role;
+    },
     GET_MENUS: function GET_MENUS(state, menus) {
       state.menus = menus;
     },
     REMOVE_MENUS: function REMOVE_MENUS(state, menus) {
-      state.menus = [];
+      state.menus = '';
     },
     SET_ROUTES: function SET_ROUTES(state, routes) {
       state.routes = routes;
@@ -14937,6 +14895,7 @@ var store = new vuex__WEBPACK_IMPORTED_MODULE_1__["default"].Store({
           }).then(function (response) {
             //console.log(response)
             localStorage.removeItem('token');
+            localStorage.removeItem('menu');
             context.commit('DESTROYTOKEN');
             context.commit('REMOVE_USER');
             context.commit('REMOVE_MENUS');
@@ -14951,25 +14910,7 @@ var store = new vuex__WEBPACK_IMPORTED_MODULE_1__["default"].Store({
           });
         });
       }
-    } // async getMenus(context) {
-    //     if (context.getters.loggedIn) {
-    //         const menus = await axios.get("/api/menus", {
-    //             headers: { Authorization: "Bearer " + context.state.token }
-    //         });
-    //         context.dispatch('getRoutes');
-    //         return menus.data.data;
-    //     }
-    // },
-    // async getRoutes(context) {
-    //     if (context.getters.loggedIn) {
-    //         const promise = await axios.get("/api/app-routes", {
-    //             headers: { Authorization: "Bearer " + context.state.token }
-    //         });
-    //         let routes = promise.data.data.map(route => route.route_name);
-    //         context.commit("SET_ROUTES",routes);
-    //     }
-    // }
-
+    }
   }
 });
 

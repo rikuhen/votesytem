@@ -11,6 +11,22 @@
     <div class="pcoded-inner-navbar">
       <ul class="pcoded-item" item-border="true" item-border-style="none" subitem-border="true">
         <b-link
+          router-tag="li"
+          class="is-hover pcoded-trigger"
+          subitem-icon="style1"
+          dropdown-icon="style1"
+          v-if="menuRole == 'voter'"
+          :to="{name: 'vote'}"
+        >
+          <a class="waves-effect waves-dark">
+            <span class="pcoded-micon">
+              <feather type="edit" class="icon-sidebar" size="14"></feather>
+            </span>
+            <span class="pcoded-mtext">Votar</span>
+          </a>
+        </b-link>
+
+        <!-- <b-link
           v-for="(menu,index) in menus"
           v-bind:key="menu.id"
           :to="{name: menu.route ? menu.route : '#'}"
@@ -32,10 +48,10 @@
               :type="isActive == index ?  'chevron-down' : 'chevron-right'"
               size="12"
             ></feather>
-          </a>
+        </a>-->
 
-          <!-- Children -->
-          <ul v-if="menu.children.length > 0" class="pcoded-submenu">
+        <!-- Children -->
+        <!-- <ul v-if="menu.children.length > 0" class="pcoded-submenu">
             <b-link
               v-for="children in menu.children"
               v-bind:key="children.id"
@@ -48,7 +64,7 @@
               </a>
             </b-link>
           </ul>
-        </b-link>
+        </b-link>-->
       </ul>
     </div>
   </nav>
@@ -59,22 +75,24 @@ export default {
   name: "NavbarMenuComponent",
   data() {
     return {
-      menus: [],
+      menuRole: "",
       isActive: null,
-      showMobileMenu:false
+      showMobileMenu: false
     };
   },
-  methods: {
-  },
+  methods: {},
   created() {
-    // this.$store.dispatch("getMenus").then(result => (this.menus = result));
+    this.menuRole = this.$store.getters.getMenus;
   },
   mounted() {
-    this.$root.$on('toggle-mobile-menu', (value) => this.showMobileMenu = value)
+    this.$root.$on(
+      "toggle-mobile-menu",
+      value => (this.showMobileMenu = value)
+    );
   }
 };
 </script>
 
 <style lang="scss">
-// @import "./../../../sass/horizontal-menu.scss';
+@import "./../../../../sass/horizontal-menu.scss";
 </style>

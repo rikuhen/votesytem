@@ -111,6 +111,8 @@ export default {
       promise
         .then(response => {
           this.$store.commit("SET_LAYOUT", "app-layout");
+          localStorage.setItem("menu", "voter");
+          this.$store.commit("SET_MENUS", "voter");
           this.$router.push({ name: "vote" });
         })
         .catch(exception => {
@@ -135,5 +137,4 @@ export default {
 .login-logo-img {
   width: 8%;
 }
-
 </style>
