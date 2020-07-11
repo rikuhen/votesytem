@@ -7,6 +7,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Passport\HasApiTokens;
 use Illuminate\Database\Eloquent\Builder;
+use App\Notifications\ThankForVote;
 
 class User extends Authenticatable
 {
@@ -39,11 +40,14 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    protected static function boot() {
-        parent::boot();
 
-        // static::addGlobalScope('role', function (Builder $builder) {
-        //     $builder->whereIn('role', ['admin','supervisor']);
-        // });
-    }
+
+    /**
+     * Functions
+     */
+
+     public function thankForVote()
+     {
+        $this->notify(new ThankForVote());
+     }
 }

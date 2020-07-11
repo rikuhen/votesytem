@@ -16,7 +16,9 @@ class IsVoter
      */
     public function handle($request, Closure $next)
     {
-        if (Auth::user()->role == 'voter') {
+        $user = Auth::user();
+
+        if ($user->role == 'voter' && $user->enabled) {
             return $next($request);
         }
 

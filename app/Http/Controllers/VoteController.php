@@ -6,6 +6,7 @@ use App\Models\Vote;
 use Illuminate\Http\Request;
 use DB;
 use Exception;
+use App\Events\VoteRegistered;
 
 class VoteController extends Controller
 {
@@ -34,6 +35,7 @@ class VoteController extends Controller
             $vote->fill($request->all());
             $vote->saveOrFail();
             DB::commit();
+            event(new VoteRegistered());
             return response()->json(['message' => 'Gracias por registrar tu voto, serás redirigido automaticamente fuera del sistema'],200);
         }catch(Exception $e) {
             DB::rollback();
