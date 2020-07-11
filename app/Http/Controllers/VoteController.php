@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use DB;
 use Exception;
 use App\Events\VoteRegistered;
+use App\Http\Requests\VoteRequest;
 
 class VoteController extends Controller
 {
@@ -23,16 +24,17 @@ class VoteController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\VoteRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(VoteRequest $request)
     {
         DB::beginTransaction();
 
         try {
             $vote = new Vote();
             $vote->fill($request->all());
+            $vote->point = config('votes.points');
             $vote->saveOrFail();
             DB::commit();
             event(new VoteRegistered());

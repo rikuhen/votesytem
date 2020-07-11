@@ -8,7 +8,6 @@ class Vote extends Model
 {
     protected $fillable = [
         'candidate_id',
-        'point'
     ];
 
 
