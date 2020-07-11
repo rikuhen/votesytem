@@ -15,7 +15,7 @@ class UsersTableSeeder extends Seeder
         $password = Hash::make('password');
         //Admin
         User::create([
-            'num_identification' => '0926894544',
+            'identification' => '0926894544',
             'name' => 'Jorge Veliz Admin',
             'username' => 'admin',
             'role' => 'admin',
@@ -27,7 +27,7 @@ class UsersTableSeeder extends Seeder
 
         //supervisor Ministerio
         User::create([
-            'num_identification' => '9999999910',
+            'identification' => '9999999910',
             'name' => 'Veedor Ministerio',
             'username' => 'veedor_min',
             'role' => 'supervisor',
@@ -39,7 +39,7 @@ class UsersTableSeeder extends Seeder
 
         //supervisor CNE
         User::create([
-            'num_identification' => '9999999911',
+            'identification' => '9999999911',
             'name' => 'Veedor CNE',
             'username' => 'veedor_cne',
             'role' => 'supervisor',

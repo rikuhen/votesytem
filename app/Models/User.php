@@ -18,7 +18,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'username','identification','name', 'email', 'password',
     ];
 
     /**
@@ -42,8 +42,8 @@ class User extends Authenticatable
     protected static function boot() {
         parent::boot();
 
-        static::addGlobalScope('role', function (Builder $builder) {
-            $builder->whereIn('role', ['admin','supervisor']);
-        });
+        // static::addGlobalScope('role', function (Builder $builder) {
+        //     $builder->whereIn('role', ['admin','supervisor']);
+        // });
     }
 }

@@ -10,10 +10,6 @@ use Illuminate\Notifications\Notifiable;
 class Voter extends User
 {
 
-    use HasApiTokens, Notifiable;
-
-    protected $guard = "api-voters";
-
     protected $table = "users";
 
     protected static function boot()

@@ -3,17 +3,14 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Http\Resources\VoterResource;
-use App\Models\Voter;
+use App\Http\Resources\UserResource;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 use Auth;
 use Illuminate\Support\Facades\Auth as FacadesAuth;
-use Illuminate\Support\Facades\Hash;
 
-
-class LoginVoterController extends Controller
+class LoginController extends Controller
 {
     /*
     |--------------------------------------------------------------------------
@@ -28,12 +25,29 @@ class LoginVoterController extends Controller
 
     use AuthenticatesUsers;
 
+
+    /**
+     * Protected role
+     */
+
+    protected $isVoter = false;
+
     /**
      * Where to redirect users after login.
      *
      * @var string
      */
     protected $redirectTo = RouteServiceProvider::HOME;
+
+    /**
+     * Get the login username to be used by the controller.
+     *
+     * @return string
+     */
+    public function username()
+    {
+        return $this->isVoter ? 'identification' : 'username';
+    }
 
     /**
      * Create a new controller instance.
@@ -43,15 +57,18 @@ class LoginVoterController extends Controller
 
     public function login(Request $request)
     {
+        if($request->has('is_voter')) {
+            $this->isVoter = true;
+        }
+
         $this->validateLogin($request);
+
 
         // If the class is using the ThrottlesLogins trait, we can automatically throttle
         // the login attempts for this application. We'll key this by the username and
         // the IP address of the client making these requests into this application.
-        if (
-            method_exists($this, 'hasTooManyLoginAttempts') &&
-            $this->hasTooManyLoginAttempts($request)
-        ) {
+        if (method_exists($this, 'hasTooManyLoginAttempts') &&
+            $this->hasTooManyLoginAttempts($request)) {
             $this->fireLockoutEvent($request);
 
             return $this->sendLockoutResponse($request);
@@ -70,7 +87,7 @@ class LoginVoterController extends Controller
         return $this->sendFailedLoginResponse($request);
     }
 
-    /**
+     /**
      * Send the response after the user was authenticated.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -78,11 +95,11 @@ class LoginVoterController extends Controller
      */
     protected function sendLoginResponse(Request $request)
     {
-        $user = Auth::guard('api-voters')->user();
+        $user = Auth::user();
         $appname = env('app.name');
-        $success['token'] =  $user->createToken($appname)->accessToken;
+        $success['token'] =  $user->createToken($appname)-> accessToken;
         $this->clearLoginAttempts($request);
-        return response()->json(['success' => $success], 200);
+        return response()->json(['success' => $success],200);
     }
 
     /**
@@ -92,49 +109,15 @@ class LoginVoterController extends Controller
      */
     public function getInfo(Request $request)
     {
-        return new VoterResource($request->voter());
+        return new UserResource($request->user());
     }
 
 
     public function logout(Request $request)
     {
         $logout = $request->user()->token()->revoke();
-        return response()->json(['message' => 'Usuario fuera'], 200);
+        return response()->json(['message' => 'Usuario fuera'],200);
     }
 
-    /**
-     * Get the login username to be used by the controller.
-     *
-     * @return string
-     */
-    public function username()
-    {
-        return 'num_identification';
-    }
 
-    /**
-     * Attempt to log the user into the application.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return bool
-     */
-    protected function attemptLogin(Request $request)
-    {
-        $password = Hash::make($request->get('password'));
-        $voter = Voter::where($this->username(), $request->get($this->username()))
-            ->where('enabled', '1')
-            ->first();
-        if (!$voter) return false;
-
-        $validCredentials = Hash::check($request->get('password'), $voter->getAuthPassword());
-
-        if ($validCredentials) {
-            return Auth::guard('api-voters')->attempt(
-                $this->credentials($request),
-                $request->filled('remember')
-            );
-        }
-
-        return false;
-    }
 }

@@ -18,7 +18,7 @@ class CandidateController extends Controller
      */
     public function index()
     {
-        $customers = Candidate::all();
+        $customers = Candidate::orderBy('name','asc')->orderBy('type')->get();
         return CandidateResource::collection($customers);
 
     }
@@ -81,7 +81,7 @@ class CandidateController extends Controller
                 DB::commit();
                 return new CandidateResource($candidate);
             }
-            return response()->json(['message' => 'Candidato o lista no encontrada'], 404); 
+            return response()->json(['message' => 'Candidato o lista no encontrada'], 404);
         }catch(Exception $e) {
             DB::rollback();
             return response()->json(['message' => 'Hubo un error al actualizar el candidato, intente nuevamente'],411);

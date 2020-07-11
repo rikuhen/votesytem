@@ -1,7 +1,5 @@
 <?php
 
-use Illuminate\Support\Facades\App;
-
 return [
 
     /*
@@ -48,12 +46,6 @@ return [
             'provider' => 'users',
             //'hash' => false,
         ],
-
-        'api-voters' => [
-            'driver' => 'session',
-            'provider' => 'voters',
-            //'hash' => false,
-        ],
     ],
 
     /*
@@ -79,10 +71,6 @@ return [
             'model' => \App\Models\User::class,
         ],
 
-        'voters' => [
-            'driver' => 'eloquent',
-            'model' => \App\Models\Voter::class,
-        ],
         // 'users' => [
         //     'driver' => 'database',
         //     'table' => 'users',
