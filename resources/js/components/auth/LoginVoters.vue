@@ -2,7 +2,7 @@
   <div>
     <b-form class="md-float-material form-material" @submit="doLogin">
       <div class="text-center">
-        <!-- <img src="./../../../images/svg/logo.svg" class="img-fluid login-logo-img" /> -->
+        <img src="./../../../images/logo.png" class="img-fluid login-logo-img" />
       </div>
       <div class="card auth-box">
         <div class="card-block">

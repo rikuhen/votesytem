@@ -67,7 +67,7 @@ export default {
   methods: {
   },
   created() {
-    this.$store.dispatch("getMenus").then(result => (this.menus = result));
+    // this.$store.dispatch("getMenus").then(result => (this.menus = result));
   },
   mounted() {
     this.$root.$on('toggle-mobile-menu', (value) => this.showMobileMenu = value)

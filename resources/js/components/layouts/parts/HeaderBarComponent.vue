@@ -7,8 +7,8 @@
     <div class="navbar-wrapper">
       <div class="navbar-logo" logo-theme="theme1">
         <!-- TODO LOGO -->
-        <b-link :to="{name:'home'}" go>
-          <!-- <img src="./../../../images/svg/logo.svg" class="mx-auto w-25 img-fluid" /> -->
+        <b-link :to="{name:'vote'}" go>
+          <img src="./../../../../images/logo.png" class="mx-auto w-25 img-fluid" />
         </b-link>
 
         <a
@@ -16,17 +16,23 @@
           id="mobile-collapse"
           @click="showMobileMenuComponent = !showMobileMenuComponent;emitEventForMobileMenu()"
         >
-          <feather :type="!showMobileMenuComponent ? 'toggle-right' : 'toggle-left' " class="icon-menu"></feather>
+          <feather
+            :type="!showMobileMenuComponent ? 'toggle-right' : 'toggle-left' "
+            class="icon-menu"
+          ></feather>
         </a>
 
-        <a class="mobile-options waves-effect waves-light" @click="showMobileUserProfile = !showMobileUserProfile">
+        <a
+          class="mobile-options waves-effect waves-light"
+          @click="showMobileUserProfile = !showMobileUserProfile"
+        >
           <feather type="more-horizontal"></feather>
         </a>
       </div>
       <div class="navbar-container container-fluid d-inline">
         <ul class="nav-right" :class="{'d-block':showMobileUserProfile}">
           <li class="user-profile header-notification">
-            <user-profile :username="this.user.fullname"></user-profile>
+            <user-profile :username="this.user.name"></user-profile>
           </li>
         </ul>
       </div>
@@ -56,7 +62,7 @@ export default {
   },
   methods: {
     emitEventForMobileMenu() {
-        this.$root.$emit('toggle-mobile-menu',this.showMobileMenuComponent)
+      this.$root.$emit("toggle-mobile-menu", this.showMobileMenuComponent);
     }
   }
 };

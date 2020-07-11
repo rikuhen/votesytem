@@ -394,6 +394,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "HeaderBar",
@@ -414,7 +420,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     emitEventForMobileMenu: function emitEventForMobileMenu() {
-      this.$root.$emit('toggle-mobile-menu', this.showMobileMenuComponent);
+      this.$root.$emit("toggle-mobile-menu", this.showMobileMenuComponent);
     }
   }
 });
@@ -496,18 +502,13 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   methods: {},
-  created: function created() {
-    var _this = this;
-
-    this.$store.dispatch("getMenus").then(function (result) {
-      return _this.menus = result;
-    });
+  created: function created() {// this.$store.dispatch("getMenus").then(result => (this.menus = result));
   },
   mounted: function mounted() {
-    var _this2 = this;
+    var _this = this;
 
     this.$root.$on('toggle-mobile-menu', function (value) {
-      return _this2.showMobileMenu = value;
+      return _this.showMobileMenu = value;
     });
   }
 });
@@ -544,7 +545,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      showNotificationUser: false
+    };
+  },
   props: {
     username: {
       type: String,
@@ -558,7 +565,7 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       this.$store.dispatch("destroyToken").then(function (response) {
-        _this.$store.commit("SET_LAYOUT", "simple-layout");
+        _this.$store.commit("SET_LAYOUT", "auth-layout");
 
         _this.$router.push({
           name: "login"
@@ -8771,7 +8778,12 @@ var render = function() {
           on: { submit: _vm.doLogin }
         },
         [
-          _c("div", { staticClass: "text-center" }),
+          _c("div", { staticClass: "text-center" }, [
+            _c("img", {
+              staticClass: "img-fluid login-logo-img",
+              attrs: { src: __webpack_require__(/*! ./../../../images/logo.png */ "./resources/images/logo.png") }
+            })
+          ]),
           _vm._v(" "),
           _c("div", { staticClass: "card auth-box" }, [
             _c(
@@ -9123,7 +9135,12 @@ var render = function() {
           "div",
           { staticClass: "navbar-logo", attrs: { "logo-theme": "theme1" } },
           [
-            _c("b-link", { attrs: { to: { name: "home" }, go: "" } }),
+            _c("b-link", { attrs: { to: { name: "vote" }, go: "" } }, [
+              _c("img", {
+                staticClass: "mx-auto w-25 img-fluid",
+                attrs: { src: __webpack_require__(/*! ./../../../../images/logo.png */ "./resources/images/logo.png") }
+              })
+            ]),
             _vm._v(" "),
             _c(
               "a",
@@ -9181,11 +9198,7 @@ var render = function() {
                 _c(
                   "li",
                   { staticClass: "user-profile header-notification" },
-                  [
-                    _c("user-profile", {
-                      attrs: { username: this.user.fullname }
-                    })
-                  ],
+                  [_c("user-profile", { attrs: { username: this.user.name } })],
                   1
                 )
               ]
@@ -9372,50 +9385,66 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "dropdown-primary dropdown" }, [
-    _c(
-      "div",
-      {
-        staticClass: "dropdown-toggle",
-        attrs: { "data-toggle": "dropdown", "aria-expanded": "false" }
-      },
-      [
-        _c("b-icon-person-fill"),
-        _vm._v(" "),
-        _c("span", [_vm._v(_vm._s(_vm.username))]),
-        _vm._v(" "),
-        _c("b-icon-caret-down-fill", { attrs: { scale: "0.5" } })
-      ],
-      1
-    ),
-    _vm._v(" "),
-    _c(
-      "ul",
-      {
-        staticClass: "show-notification profile-notification dropdown-menu",
-        attrs: { "data-dropdown-in": "fadeIn", "data-dropdown-out": "fadeOut" }
-      },
-      [
-        _c("li", [
-          _c(
-            "a",
-            {
-              on: {
-                click: function($event) {
-                  return _vm.logout()
+  return _c(
+    "div",
+    {
+      staticClass: "dropdown-primary dropdown",
+      class: { show: _vm.showNotificationUser },
+      on: {
+        click: function($event) {
+          _vm.showNotificationUser = !_vm.showNotificationUser
+        }
+      }
+    },
+    [
+      _c(
+        "div",
+        {
+          staticClass: "dropdown-toggle",
+          attrs: { "data-toggle": "dropdown", "aria-expanded": false }
+        },
+        [
+          _c("b-icon-person-fill"),
+          _vm._v(" "),
+          _c("span", [_vm._v(_vm._s(_vm.username))]),
+          _vm._v(" "),
+          _c("b-icon-caret-down-fill", { attrs: { scale: "0.5" } })
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c(
+        "ul",
+        {
+          staticClass: "show-notification profile-notification dropdown-menu",
+          class: { show: _vm.showNotificationUser },
+          attrs: {
+            "data-dropdown-in": "fadeIn",
+            "data-dropdown-out": "fadeOut"
+          }
+        },
+        [
+          _c("li", [
+            _c(
+              "a",
+              {
+                on: {
+                  click: function($event) {
+                    return _vm.logout()
+                  }
                 }
-              }
-            },
-            [
-              _c("feather", { attrs: { type: "log-out" } }),
-              _vm._v("Salir\n      ")
-            ],
-            1
-          )
-        ])
-      ]
-    )
-  ])
+              },
+              [
+                _c("feather", { attrs: { type: "log-out" } }),
+                _vm._v("Salir\n      ")
+              ],
+              1
+            )
+          ])
+        ]
+      )
+    ]
+  )
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -13878,6 +13907,17 @@ try {
 
 module.exports = g;
 
+
+/***/ }),
+
+/***/ "./resources/images/logo.png":
+/*!***********************************!*\
+  !*** ./resources/images/logo.png ***!
+  \***********************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "/images/logo.png?c0a2e1c0050398f92377ca355fca0e4d";
 
 /***/ }),
 
