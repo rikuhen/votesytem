@@ -119,7 +119,7 @@ export default {
           let response = exception.response;
           let status = response.status;
           if (status == 422) {
-            this.error = "Cédula o Clave erroneo";
+            this.error = "Cédula o Clave erronea";
             this.form.password = "";
           } else {
             this.error = response.data.message;

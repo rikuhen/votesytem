@@ -9,6 +9,8 @@ use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 use Auth;
 use Illuminate\Support\Facades\Auth as FacadesAuth;
+use App\Rules\CanLoginAgain;
+use App\Models\User;
 
 class LoginController extends Controller
 {
@@ -57,18 +59,27 @@ class LoginController extends Controller
 
     public function login(Request $request)
     {
-        if($request->has('is_voter')) {
+        if ($request->has('is_voter')) {
             $this->isVoter = true;
         }
 
         $this->validateLogin($request);
 
+        if ($this->isVoter) {
+            if (!$this->validateLoginForVoters($request)) {
+                return response()->json(["message" => 'Usted ya ejerció su derecho al voto, gracias por participar'], 401);
+            }
+        }
+
+
 
         // If the class is using the ThrottlesLogins trait, we can automatically throttle
         // the login attempts for this application. We'll key this by the username and
         // the IP address of the client making these requests into this application.
-        if (method_exists($this, 'hasTooManyLoginAttempts') &&
-            $this->hasTooManyLoginAttempts($request)) {
+        if (
+            method_exists($this, 'hasTooManyLoginAttempts') &&
+            $this->hasTooManyLoginAttempts($request)
+        ) {
             $this->fireLockoutEvent($request);
 
             return $this->sendLockoutResponse($request);
@@ -87,7 +98,7 @@ class LoginController extends Controller
         return $this->sendFailedLoginResponse($request);
     }
 
-     /**
+    /**
      * Send the response after the user was authenticated.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -97,9 +108,9 @@ class LoginController extends Controller
     {
         $user = Auth::user();
         $appname = env('app.name');
-        $success['token'] =  $user->createToken($appname)-> accessToken;
+        $success['token'] =  $user->createToken($appname)->accessToken;
         $this->clearLoginAttempts($request);
-        return response()->json(['success' => $success],200);
+        return response()->json(['success' => $success], 200);
     }
 
     /**
@@ -116,7 +127,7 @@ class LoginController extends Controller
     public function logout(Request $request)
     {
         $logout = $request->user()->token()->revoke();
-        return response()->json(['message' => 'Usuario fuera'],200);
+        return response()->json(['message' => 'Usuario fuera'], 200);
     }
 
 
@@ -129,14 +140,28 @@ class LoginController extends Controller
     protected function attemptLogin(Request $request)
     {
         $credentials = [
-            $this->username() =>$request->get($this->username()),
+            $this->username() => $request->get($this->username()),
             'password' => $request->get('password'),
             'enabled' => 1
         ];
         return $this->guard()->attempt(
-            $credentials, $request->filled('remember')
+            $credentials,
+            $request->filled('remember')
         );
     }
 
-
+    /**
+     * Validate the user login request.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return void
+     *
+     * @throws \Illuminate\Validation\ValidationException
+     */
+    protected function validateLoginForVoters(Request $request)
+    {
+        $user =  User::where($this->username(), $request->get($this->username()))->whereEnabled(1)->first();
+        if (!$user) return false;
+        return true;
+    }
 }
