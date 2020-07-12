@@ -190,12 +190,12 @@ __webpack_require__.r(__webpack_exports__);
 
         if (status == 422) {
           _this.error = "Cédula o Clave erronea";
-          _this.form.password = "";
         } else {
           _this.error = response.data.message;
         }
 
         _this.hasError = true;
+        _this.form.password = "";
 
         _this.setFocusPassword();
       }).then(function () {

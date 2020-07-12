@@ -120,11 +120,11 @@ export default {
           let status = response.status;
           if (status == 422) {
             this.error = "Cédula o Clave erronea";
-            this.form.password = "";
           } else {
             this.error = response.data.message;
           }
           this.hasError = true;
+          this.form.password = "";
           this.setFocusPassword();
         })
         .then(() => (this.fStates.isSubmiting = false));
