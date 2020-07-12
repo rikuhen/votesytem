@@ -16,7 +16,7 @@ class CandidateTableSeeder extends Seeder
             'name' => 'Voto Blanco',
             'description' => 'Voto Blanco',
             'enabled' => 1,
-            'type' => 'nulled',
+            'type' => 'white',
         ]);
 
         Candidate::create([
@@ -26,6 +26,13 @@ class CandidateTableSeeder extends Seeder
             'type' => 'nulled',
         ]);
 
-        factory(Candidate::class,2)->create();
+        Candidate::create([
+            'name' => 'Lista A',
+            'description' => 'Lista A',
+            'enabled' => 1,
+            'type' => 'candidate',
+        ]);
+
+
     }
 }

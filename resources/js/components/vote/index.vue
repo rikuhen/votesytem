@@ -2,14 +2,31 @@
   <div>
     <content-header-component
       title="Votaciones"
-      subtitle="Seleccione una candidato para relizar su voto"
+      subtitle="Seleccione un candidato para relizar su voto"
       icon="edit"
     ></content-header-component>
     <content-main-content-component>
       <b-col lg="4" sm="6" v-for="candidate in candidates" :key="candidate.id">
-        <div class="card">
-          <div class="card-header">
-            <h5 class="text-md-left text-sm-center text-center d-block d-block">{{candidate.name}}</h5>
+        <div class="card social-card">
+          <div class="card-body text-center">
+            <h3 class="text-facebook m-b-20">
+              <feather type="edit"></feather>
+            </h3>
+            <h4 class="text-facebook f-w-700">{{candidate.description}}</h4>
+          </div>
+          <div class="card-footer">
+            <b-row>
+              <b-col md="6" sm="12">
+                <b-button @click="showMessageForVote(candidate)" block variant="primary">
+                  <feather type="thumbs-up" size="13px"></feather>Votar
+                </b-button>
+              </b-col>
+              <b-col md="6" sm="12" v-if="candidate.type == 'candidate'">
+                <b-button variant="info" size="md" class="waves-effect waves-light" block>
+                  <feather type="users" size="13px"></feather>Miembros
+                </b-button>
+              </b-col>
+            </b-row>
           </div>
         </div>
       </b-col>
@@ -19,6 +36,7 @@
 
 <script>
 import axios from "axios";
+import swal from "sweetalert";
 import ContentHeaderComponent from "./../layouts/parts/ContentHeaderComponent";
 import ContentMainContentComponent from "./../layouts/parts/ContentMainContentComponent";
 export default {
@@ -38,6 +56,69 @@ export default {
         headers: { Authorization: "Bearer " + localStorage.getItem("token") }
       });
       return menus.data.data;
+    },
+
+    showMessageForVote(candidate) {
+      let txtComplement = "";
+
+      switch (candidate.type) {
+        case "candidate":
+          txtComplement = " por " + candidate.name + "?";
+          break;
+        case "nulled":
+          txtComplement = " nulo?";
+          break;
+        default:
+          txtComplement = " en blanco?";
+          break;
+      }
+
+      swal({
+        title: "Atención",
+        text:
+          "¿Está seguro de votar" +
+          txtComplement +
+          " Una vez realizado el voto no podrá cambiar de decisión",
+        icon: "warning",
+        dangerMode: false,
+        buttons: {
+          cancel: "Cancelar",
+          defeat: {
+            text: "Votar",
+            closeModal: false
+          }
+        }
+      })
+        .then(action => {
+          if (!action) throw null;
+          return this.saveVote(candidate.id);
+        })
+        .then(text => {
+          swal({
+            title: "Voto realizado",
+            icon: "success",
+            text,
+            button: "Aceptar"
+          }).then(r => this.logout());
+        })
+        .catch(reason => {});
+    },
+    async saveVote(candidateId) {
+      let data = {
+        candidate_id: candidateId
+      };
+      const promise = await axios.post("/api/vote", data, {
+        headers: {
+          Authorization: "Bearer " + localStorage.getItem("token")
+        }
+      });
+      return await promise.data.message;
+    },
+    logout() {
+      this.$store.dispatch("destroyToken").then(response => {
+        this.$store.commit("SET_LAYOUT", "auth-layout");
+        this.$router.push({ name: "login" });
+      });
     }
   },
   mounted() {

@@ -18,7 +18,10 @@ class CandidateController extends Controller
      */
     public function index()
     {
-        $customers = Candidate::orderBy('name','asc')->orderBy('type')->get();
+        $customers = Candidate::where('enabled','1')
+        ->orderBy('name','asc')
+        ->orderBy('type','asc')
+        ->get();
         return CandidateResource::collection($customers);
 
     }

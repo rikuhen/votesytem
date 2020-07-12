@@ -17,7 +17,7 @@ class CreateTableCandidates extends Migration
             $table->bigIncrements('id');
             $table->string('name',50)->unique();
             $table->string('description',200);
-            $table->enum('type',['regular','nulled','white']);
+            $table->enum('type',['candidate','nulled','white']);
             $table->string('img_path')->nullable();
             $table->boolean('enabled');
             $table->timestamps();
