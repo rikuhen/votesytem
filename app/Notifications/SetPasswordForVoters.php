@@ -11,14 +11,16 @@ class SetPasswordForVoters extends Notification implements ShouldQueue
 {
     use Queueable;
 
+    private $password;
+
     /**
      * Create a new notification instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($password)
     {
-        //
+        $this->password = $password;
     }
 
     /**
@@ -29,7 +31,7 @@ class SetPasswordForVoters extends Notification implements ShouldQueue
      */
     public function via($notifiable)
     {
-        return ['mail'];
+        return ['mail', 'database'];
     }
 
     /**
@@ -40,11 +42,15 @@ class SetPasswordForVoters extends Notification implements ShouldQueue
      */
     public function toMail($notifiable)
     {
-        $message = (new MailMessage)
-        ->line('The introduction to the notification.')
-        ->action('Notification Action', url('/'))
-        ->line('Thank you for using our application!');
-        dd($message);
+        $companyName = config('app.name');
+        return (new MailMessage)
+            ->subject("{$companyName} - Notificación de Usuario")
+            ->line("Estimado(a) {$notifiable->name}, notificamos sus credenciales de acceso para ejercer su derecho al voto en elección de representantes del {$companyName}")
+            ->line("Usuario: {$notifiable->identification}")
+            ->line("Contraseña:  {$this->password}")
+            ->line("Puede ejercer su voto presionando sobre el botón Votar")
+            ->action('Votar', url('/'))
+            ->line('Esto es una notificación automática, favor no contestar este mensaje');
     }
 
     /**
@@ -57,6 +63,15 @@ class SetPasswordForVoters extends Notification implements ShouldQueue
     {
         return [
             //
+        ];
+    }
+
+    public function toDatabase($notifiable)
+    {
+        return [
+            'name' => $notifiable->name,
+            'email' => $notifiable->email,
+            'description' => 'Se procedio a notificar su usuario'
         ];
     }
 }

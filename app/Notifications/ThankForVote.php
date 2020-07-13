@@ -29,7 +29,7 @@ class ThankForVote extends Notification
      */
     public function via($notifiable)
     {
-        return ['mail'];
+        return ['mail', 'database'];
     }
 
     /**
@@ -59,6 +59,17 @@ class ThankForVote extends Notification
     {
         return [
             //
+        ];
+    }
+
+
+    public function toDatabase($notifiable)
+    {
+        return [
+            'name' => $notifiable->name,
+            'identification' => $notifiable->identification,
+            'email' => $notifiable->email,
+            'description' => 'El usuario procedio a votar sin problemas'
         ];
     }
 }
