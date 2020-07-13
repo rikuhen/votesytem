@@ -43,11 +43,16 @@ class SetPasswordForVoters extends Notification implements ShouldQueue
     public function toMail($notifiable)
     {
         $companyName = config('app.name');
+        $dateEvent =  config('votes.app-available-from-date'); 
+        $startHour = config('votes.app-available-from-hour');
+        $endHour = config('votes.app-available-until-hour');
+
         return (new MailMessage)
             ->subject("{$companyName} - Notificación de Usuario")
             ->line("Estimado(a) {$notifiable->name}, notificamos sus credenciales de acceso para ejercer su derecho al voto en elección de representantes del {$companyName}")
             ->line("Usuario: {$notifiable->identification}")
             ->line("Contraseña:  {$this->password}")
+            ->line("El sistema estará disponible el {$dateEvent} desde las {$startHour} hasta las {$endHour} del mismo día")
             ->line("Puede ejercer su voto presionando sobre el botón Votar")
             ->action('Votar', url('/'))
             ->line('Esto es una notificación automática, favor no contestar este mensaje');

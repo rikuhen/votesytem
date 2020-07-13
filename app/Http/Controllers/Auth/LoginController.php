@@ -195,6 +195,10 @@ class LoginController extends Controller
      */
     public function appAvailable()
     {
+        
+        return config('app.enable-for-voters');
+
+
         $appAvailableFrom = Carbon::parse(config('votes.app-available-from'));
         $appAvailableUntil =Carbon::parse(config('votes.app-available-until'));
         $now = Carbon::now();
