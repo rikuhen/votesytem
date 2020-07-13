@@ -8,6 +8,7 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Passport\HasApiTokens;
 use Illuminate\Database\Eloquent\Builder;
 use App\Notifications\ThankForVote;
+use App\Notifications\SetPasswordForVoters;
 
 class User extends Authenticatable
 {
@@ -19,7 +20,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'username','identification','name', 'email', 'password',
+        'username', 'identification', 'name', 'email', 'password',
     ];
 
     /**
@@ -46,8 +47,14 @@ class User extends Authenticatable
      * Functions
      */
 
-     public function thankForVote()
-     {
+    public function thankForVote()
+    {
         $this->notify(new ThankForVote());
-     }
+    }
+
+    public function sendPassword()
+    {
+        $when = now()->addMinute();
+        $this->notify((new SetPasswordForVoters())->delay($when));
+    }
 }

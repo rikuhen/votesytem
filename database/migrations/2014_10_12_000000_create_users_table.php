@@ -21,11 +21,13 @@ class CreateUsersTable extends Migration
             $table->string('username')->nullable()->unique();
             $table->string('name');
             $table->string('email')->unique();
-            $table->string('password');
+            // $table->string('email');
+            $table->string('password')->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->enum('role',['voter','admin','supervisor']);
             //Permite votar
             $table->boolean('enabled');
+            $table->string('observation')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });
