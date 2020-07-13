@@ -55,6 +55,157 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/admin/auth/LoginUsers.vue?vue&type=script&lang=js&":
+/*!********************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/admin/auth/LoginUsers.vue?vue&type=script&lang=js& ***!
+  \********************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  name: "LoginUsers",
+  data: function data() {
+    return {
+      form: {
+        username: "",
+        password: "",
+        is_voter: true
+      },
+      error: "",
+      hasError: false,
+      fStates: {
+        username: false,
+        password: false,
+        isSubmiting: false
+      }
+    };
+  },
+  methods: {
+    setFocusPassword: function setFocusPassword() {
+      this.$refs.password.$el.focus();
+    },
+    doLogin: function doLogin(e) {
+      var _this = this;
+
+      e.preventDefault();
+      e.stopPropagation();
+      this.fStates.isSubmiting = true;
+      this.hasError = false;
+      var promise = this.$store.dispatch("retrieveToken", {
+        username: this.form.username,
+        password: this.form.password
+      });
+      promise.then(function (response) {
+        _this.$store.commit("SET_LAYOUT", "app-layout");
+
+        localStorage.setItem("menu", "user");
+
+        _this.$store.commit("SET_MENUS", "user");
+
+        _this.$router.push({
+          name: "admin-dashboard"
+        });
+      })["catch"](function (exception) {
+        var response = exception.response;
+        var status = response.status;
+
+        if (status == 422) {
+          _this.error = "Usuario o Clave erronea";
+        } else {
+          _this.error = response.data.message;
+        }
+
+        _this.hasError = true;
+        _this.form.password = "";
+
+        _this.setFocusPassword();
+      }).then(function () {
+        return _this.fStates.isSubmiting = false;
+      });
+    }
+  }
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/auth/LoginVoters.vue?vue&type=script&lang=js&":
 /*!***************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/auth/LoginVoters.vue?vue&type=script&lang=js& ***!
@@ -960,6 +1111,25 @@ exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/c
 
 // module
 exports.push([module.i, ".pcoded[theme-layout=horizontal] .pcoded-container {\n  position: relative;\n}\n.pcoded[theme-layout=horizontal] .pcoded-header {\n  z-index: 1024;\n}\n.pcoded[theme-layout=horizontal] .pcoded-navbar {\n  display: block;\n  height: 50px;\n  width: 100%;\n  z-index: 1023;\n  box-shadow: 0 2px 7px -3px rgba(0, 0, 0, 0.4);\n}\n.pcoded[theme-layout=horizontal] .pcoded-navbar .pcoded-item .pcoded-hasmenu.pcoded-trigger > .pcoded-submenu {\n  opacity: 1;\n  visibility: visible;\n  transform: rotateX(0deg);\n}\n.pcoded[theme-layout=horizontal] .pcoded-navbar li.pcoded-hasmenu > a:after {\n  right: 3px;\n  top: -3px;\n}\n.pcoded[theme-layout=horizontal] #styleSelector {\n  z-index: 1024;\n}\n.pcoded[theme-layout=horizontal] .page-header {\n  margin-top: 80px;\n}\n.pcoded[theme-layout=horizontal][pcoded-device-type=phone] .p-chat-user,\n.pcoded[theme-layout=horizontal][pcoded-device-type=phone] .showChat_inner, .pcoded[theme-layout=horizontal][pcoded-device-type=tablet] .p-chat-user,\n.pcoded[theme-layout=horizontal][pcoded-device-type=tablet] .showChat_inner {\n  top: 107px;\n}\n.pcoded[theme-layout=horizontal][pcoded-device-type=phone] .page-header, .pcoded[theme-layout=horizontal][pcoded-device-type=tablet] .page-header {\n  padding-top: 0;\n}\n.pcoded[theme-layout=horizontal][pcoded-device-type=phone] .pcoded-navbar[pcoded-navbar-position=absolute], .pcoded[theme-layout=horizontal][pcoded-device-type=tablet] .pcoded-navbar[pcoded-navbar-position=absolute] {\n  top: 70px;\n}\n.pcoded[theme-layout=horizontal][pcoded-device-type=desktop] .navbar-logo .mobile-menu,\n.pcoded[theme-layout=horizontal][pcoded-device-type=desktop] .pcoded-brand .menu-toggle {\n  display: none;\n}\n.pcoded[theme-layout=horizontal] .pcoded-navbar .pcoded-item[item-border=true][item-border-style=dashed] > li > a {\n  border-right-style: dashed;\n}\n.pcoded[theme-layout=horizontal] .pcoded-navbar .pcoded-item[item-border=true][item-border-style=dotted] > li > a {\n  border-right-style: dotted;\n}\n.pcoded[theme-layout=horizontal] .pcoded-navbar .pcoded-item[item-border=true][item-border-style=solid] > li > a {\n  border-right-style: solid;\n}\n.pcoded[theme-layout=horizontal] .pcoded-navbar .pcoded-item[item-border=true][item-border-style=dashed] .pcoded-hasmenu .pcoded-submenu li > a {\n  border-bottom-style: dashed;\n}\n.pcoded[theme-layout=horizontal] .pcoded-navbar .pcoded-item[item-border=true][item-border-style=dotted] .pcoded-hasmenu .pcoded-submenu li > a {\n  border-bottom-style: dotted;\n}\n.pcoded[theme-layout=horizontal] .pcoded-navbar .pcoded-item[item-border=true][item-border-style=solid] .pcoded-hasmenu .pcoded-submenu li > a {\n  border-bottom-style: solid;\n}\n.pcoded[theme-layout=horizontal] .pcoded-navbar .pcoded-item[item-border=false] > li > a {\n  border-right-width: 0;\n}\n.pcoded[theme-layout=horizontal] .pcoded-navbar .pcoded-item[item-border=true] > li > a {\n  border-right-width: 1px;\n}\n.pcoded[theme-layout=horizontal] .pcoded-navbar .pcoded-item[subitem-border=false] .pcoded-hasmenu .pcoded-submenu li > a {\n  border-bottom-width: 0;\n}\n.pcoded[theme-layout=horizontal] .pcoded-navbar .pcoded-item[subitem-border=true] .pcoded-hasmenu .pcoded-submenu li > a {\n  border-bottom-width: 1px;\n}\n.pcoded[theme-layout=horizontal] .pcoded-navbar .pcoded-item {\n  display: block;\n  list-style: none;\n  margin: 0;\n  padding: 0;\n  position: relative;\n}\n.pcoded[theme-layout=horizontal] .pcoded-navbar .pcoded-item > li {\n  display: block;\n  list-style: outside none none;\n  margin: 0;\n  padding: 5px;\n  position: relative;\n}\n.pcoded[theme-layout=horizontal] .pcoded-navbar .pcoded-item > li > a {\n  display: block;\n  font-size: 13px;\n  padding: 5px 20px;\n  text-decoration: none;\n  position: relative;\n}\n@media only screen and (max-width: 1200px) and (min-width: 992px) {\n.pcoded[theme-layout=horizontal] .pcoded-navbar .pcoded-item > li > a {\n    padding: 5px;\n}\n}\n.pcoded[theme-layout=horizontal] .pcoded-navbar .pcoded-item > li.pcoded-hasmenu > a {\n  line-height: 1.85;\n}\n.pcoded[theme-layout=horizontal] .pcoded-navbar .pcoded-item .pcoded-hasmenu .pcoded-submenu {\n  list-style: outside none none;\n  margin: 0;\n  padding: 5px 0;\n  box-shadow: 0 1px 7px -1px rgba(0, 0, 0, 0.4);\n}\n.pcoded[theme-layout=horizontal] .pcoded-navbar .pcoded-item .pcoded-hasmenu .pcoded-submenu li {\n  display: block;\n  list-style: outside none none;\n  margin: 0;\n  padding: 3px 10px;\n  position: relative;\n}\n.pcoded[theme-layout=horizontal] .pcoded-navbar .pcoded-item .pcoded-hasmenu .pcoded-submenu li > a {\n  display: block;\n  font-size: 14px;\n  padding: 7px 10px;\n  text-decoration: none;\n  position: relative;\n}\n.pcoded[theme-layout=horizontal] .pcoded-navbar .pcoded-item .pcoded-hasmenu .pcoded-submenu li > a:after {\n  padding-top: 7px;\n  line-height: 1;\n}\n.pcoded[theme-layout=horizontal] .pcoded-navbar .pcoded-item > li > a > .pcoded-micon {\n  font-size: 14px;\n  padding: 0;\n}\n.pcoded[theme-layout=horizontal] .pcoded-navbar .pcoded-item.pcoded-search-item > li > a > .pcoded-micon {\n  padding: 0 5px 0 7px;\n}\n.pcoded[theme-layout=horizontal] .pcoded-navbar .pcoded-item .pcoded-hasmenu .pcoded-submenu li > a .pcoded-micon {\n  font-size: 13px;\n  padding-right: 5px;\n}\n.pcoded[theme-layout=horizontal][horizontal-layout=widebox] .pcoded-container {\n  width: 100%;\n}\n.pcoded[theme-layout=horizontal][horizontal-layout=widebox] .pcoded-content .pcoded-wrapper,\n.pcoded[theme-layout=horizontal][horizontal-layout=widebox] .pcoded-header .pcoded-wrapper,\n.pcoded[theme-layout=horizontal][horizontal-layout=widebox] .pcoded-navbar .pcoded-wrapper {\n  display: block;\n  margin: 0 auto;\n  max-width: 1200px;\n  width: 100%;\n}\n.pcoded[theme-layout=horizontal] .pcoded-navbar .pcoded-item > li {\n  float: left;\n  padding: 5px 10px;\n}\n.pcoded[theme-layout=horizontal] .pcoded-navbar .pcoded-item li a {\n  transition: all 0.3s ease-in-out;\n}\n.pcoded[theme-layout=horizontal] .pcoded-navbar .pcoded-item .pcoded-hasmenu .pcoded-submenu {\n  position: absolute;\n  min-width: 200px;\n  z-index: 1;\n  border-top-width: 0;\n  top: 100%;\n}\n.pcoded[theme-layout=horizontal] .pcoded-navbar .pcoded-item .pcoded-hasmenu .pcoded-submenu li > a {\n  font-size: 14px;\n  font-weight: 500;\n  text-align: left;\n}\n.pcoded[theme-layout=horizontal] .pcoded-navbar .pcoded-item .pcoded-hasmenu .pcoded-submenu li > a > .pcoded-mtext {\n  transition: all 0s ease-in-out;\n}\n.pcoded[theme-layout=horizontal] .pcoded-navbar .pcoded-item .pcoded-hasmenu .pcoded-submenu li > a > .pcoded-mtext:before {\n  transition: all 0s ease-in-out;\n}\n.pcoded[theme-layout=horizontal] .pcoded-navbar .pcoded-item .pcoded-submenu .pcoded-submenu {\n  position: absolute;\n  min-width: 250px;\n  z-index: 1;\n  left: 100%;\n  top: -1px;\n}\n.pcoded[theme-layout=horizontal] .pcoded-navbar .pcoded-item .pcoded-hasmenu .pcoded-submenu {\n  opacity: 0;\n  visibility: hidden;\n  transform-origin: 50% 50%;\n  transition: transform 0.3s, opacity 0.3s;\n  transform-style: preserve-3d;\n  transform: rotateX(-90deg);\n}\n.pcoded[theme-layout=horizontal] .pcoded-navbar .pcoded-item .pcoded-submenu li.pcoded-hasmenu > a:after {\n  margin-left: 3px;\n  position: relative;\n  float: right;\n  top: -3px;\n}\n.pcoded[theme-layout=horizontal] .pcoded-navbar .pcoded-item > li.pcoded-hasmenu > a:after, .pcoded[theme-layout=horizontal] .pcoded-navbar .pcoded-item > li.pcoded-hasmenu.active > a:after, .pcoded[theme-layout=horizontal] .pcoded-navbar .pcoded-item > li.pcoded-hasmenu.pcoded-trigger > a:after {\n  font-style: normal;\n  margin-left: 3px;\n  padding-left: 5px;\n  position: relative;\n}\n.pcoded[theme-layout=horizontal] .pcoded-navbar .pcoded-item > .pcoded-hasmenu.edge.pcoded-trigger > .pcoded-submenu {\n  right: 0;\n}\n.pcoded[theme-layout=horizontal][horizontal-placement=top] .pcoded-navbar .pcoded-item > li.pcoded-hasmenu.pcoded-trigger.active .pcoded-submenu {\n  border-top-style: solid;\n  border-top-width: 1px;\n}\n.pcoded[theme-layout=horizontal] .pcoded-navbar .pcoded-item[subitem-border=true] .pcoded-hasmenu .pcoded-submenu > li:last-child > a {\n  border-bottom-color: transparent;\n}\n.pcoded[theme-layout=horizontal][pcoded-device-type=tablet] .pcoded-navbar .pcoded-item.pcoded-search-item > li > a > .pcoded-micon {\n  display: block;\n}\n.pcoded[theme-layout=horizontal][pcoded-device-type=desktop] .pcoded-navbar .pcoded-inner-navbar, .pcoded[theme-layout=horizontal][pcoded-device-type=tablet] .pcoded-navbar .pcoded-inner-navbar {\n  position: relative;\n}\n.pcoded[theme-layout=horizontal][pcoded-device-type=tablet] .pcoded-navbar, .pcoded[theme-layout=horizontal][pcoded-device-type=phone] .pcoded-navbar {\n  height: auto;\n  padding: 10px 10px 0;\n  position: absolute;\n  opacity: 0;\n  visibility: hidden;\n  transform-origin: 50% 50%;\n  transition: transform 0.3s, opacity 0.3s;\n  transform-style: preserve-3d;\n  transform: rotateX(-90deg);\n}\n.pcoded[theme-layout=horizontal][pcoded-device-type=tablet] .pcoded-navbar .pcoded-inner-navbar, .pcoded[theme-layout=horizontal][pcoded-device-type=phone] .pcoded-navbar .pcoded-inner-navbar {\n  height: auto;\n  position: relative;\n}\n.pcoded[theme-layout=horizontal][pcoded-device-type=tablet] .pcoded-navbar.show-menu, .pcoded[theme-layout=horizontal][pcoded-device-type=phone] .pcoded-navbar.show-menu {\n  opacity: 1;\n  visibility: visible;\n  transform: rotateX(0deg);\n}\n.pcoded[theme-layout=horizontal][pcoded-device-type=tablet] .pcoded-navbar .pcoded-item, .pcoded[theme-layout=horizontal][pcoded-device-type=phone] .pcoded-navbar .pcoded-item {\n  display: block;\n  float: none;\n  position: relative;\n  width: 100%;\n  z-index: 1;\n}\n.pcoded[theme-layout=horizontal][pcoded-device-type=tablet] .pcoded-navbar .pcoded-item > li, .pcoded[theme-layout=horizontal][pcoded-device-type=phone] .pcoded-navbar .pcoded-item > li {\n  float: none;\n  display: block;\n  position: relative;\n}\n.pcoded[theme-layout=horizontal][pcoded-device-type=tablet] .pcoded-navbar .pcoded-item[item-border=true] > li > a, .pcoded[theme-layout=horizontal][pcoded-device-type=phone] .pcoded-navbar .pcoded-item[item-border=true] > li > a {\n  border-right-width: 0;\n  border-bottom-width: 1px;\n  border-bottom-style: solid;\n}\n.pcoded[theme-layout=horizontal][pcoded-device-type=tablet] .pcoded-navbar .pcoded-item[item-border=true] > li.pcoded-trigger > a, .pcoded[theme-layout=horizontal][pcoded-device-type=phone] .pcoded-navbar .pcoded-item[item-border=true] > li.pcoded-trigger > a {\n  border-bottom-width: 0;\n}\n.pcoded[theme-layout=horizontal][pcoded-device-type=tablet] .pcoded-navbar .pcoded-item > .pcoded-hasmenu > .pcoded-submenu, .pcoded[theme-layout=horizontal][pcoded-device-type=phone] .pcoded-navbar .pcoded-item > .pcoded-hasmenu > .pcoded-submenu {\n  min-width: 100%;\n  z-index: 2;\n}\n.pcoded[theme-layout=horizontal][pcoded-device-type=tablet] .pcoded-navbar .pcoded-item > .pcoded-hasmenu.pcoded-trigger > .pcoded-submenu, .pcoded[theme-layout=horizontal][pcoded-device-type=phone] .pcoded-navbar .pcoded-item > .pcoded-hasmenu.pcoded-trigger > .pcoded-submenu {\n  position: relative;\n}\n.pcoded[theme-layout=horizontal][pcoded-device-type=tablet] .pcoded-navbar .pcoded-item > .pcoded-hasmenu > .pcoded-submenu > .pcoded-hasmenu > .pcoded-submenu, .pcoded[theme-layout=horizontal][pcoded-device-type=phone] .pcoded-navbar .pcoded-item > .pcoded-hasmenu > .pcoded-submenu > .pcoded-hasmenu > .pcoded-submenu {\n  left: 0;\n  min-width: 100%;\n  right: 0;\n  top: 0;\n  z-index: 1;\n}\n.pcoded[theme-layout=horizontal][pcoded-device-type=tablet] .pcoded-navbar .pcoded-item > .pcoded-hasmenu > .pcoded-submenu > .pcoded-hasmenu.pcoded-trigger > .pcoded-submenu,\n.pcoded[theme-layout=horizontal][pcoded-device-type=tablet] .pcoded-navbar .pcoded-item > .pcoded-hasmenu > .pcoded-submenu > .pcoded-hasmenu.pcoded-trigger > .pcoded-submenu > .pcoded-hasmenu.pcoded-trigger > .pcoded-submenu, .pcoded[theme-layout=horizontal][pcoded-device-type=phone] .pcoded-navbar .pcoded-item > .pcoded-hasmenu > .pcoded-submenu > .pcoded-hasmenu.pcoded-trigger > .pcoded-submenu,\n.pcoded[theme-layout=horizontal][pcoded-device-type=phone] .pcoded-navbar .pcoded-item > .pcoded-hasmenu > .pcoded-submenu > .pcoded-hasmenu.pcoded-trigger > .pcoded-submenu > .pcoded-hasmenu.pcoded-trigger > .pcoded-submenu {\n  position: relative;\n}\n.pcoded[theme-layout=horizontal][pcoded-device-type=tablet] .pcoded-navbar .pcoded-item > .pcoded-hasmenu > .pcoded-submenu > .pcoded-hasmenu > .pcoded-submenu > .pcoded-hasmenu > .pcoded-submenu, .pcoded[theme-layout=horizontal][pcoded-device-type=phone] .pcoded-navbar .pcoded-item > .pcoded-hasmenu > .pcoded-submenu > .pcoded-hasmenu > .pcoded-submenu > .pcoded-hasmenu > .pcoded-submenu {\n  left: 0;\n  min-width: 100%;\n  right: 0;\n  top: 0;\n  z-index: 1;\n}\n.pcoded[theme-layout=horizontal][pcoded-device-type=tablet][horizontal-placement=bottom] .pcoded-navbar, .pcoded[theme-layout=horizontal][pcoded-device-type=phone][horizontal-placement=bottom] .pcoded-navbar {\n  bottom: auto;\n}\n.pcoded[theme-layout=horizontal][pcoded-device-type=tablet] .pcoded-navbar .pcoded-item > li.pcoded-hasmenu > a:after, .pcoded[theme-layout=horizontal][pcoded-device-type=tablet] .pcoded-navbar .pcoded-item > li.pcoded-hasmenu.active > a:after, .pcoded[theme-layout=horizontal][pcoded-device-type=tablet] .pcoded-navbar .pcoded-item > li.pcoded-hasmenu.pcoded-trigger > a:after, .pcoded[theme-layout=horizontal][pcoded-device-type=phone] .pcoded-navbar .pcoded-item > li.pcoded-hasmenu > a:after, .pcoded[theme-layout=horizontal][pcoded-device-type=phone] .pcoded-navbar .pcoded-item > li.pcoded-hasmenu.active > a:after, .pcoded[theme-layout=horizontal][pcoded-device-type=phone] .pcoded-navbar .pcoded-item > li.pcoded-hasmenu.pcoded-trigger > a:after {\n  position: absolute;\n  right: 13px;\n}\n.pcoded[theme-layout=horizontal][pcoded-device-type=phone] .pcoded-header, .pcoded[theme-layout=horizontal][pcoded-device-type=tablet] .pcoded-header {\n  height: auto;\n  padding-top: 0;\n}\n.pcoded[theme-layout=horizontal][pcoded-device-type=phone] .pcoded-navbar .pcoded-item .pcoded-hasmenu .pcoded-submenu, .pcoded[theme-layout=horizontal][pcoded-device-type=tablet] .pcoded-navbar .pcoded-item .pcoded-hasmenu .pcoded-submenu {\n  border-top: none;\n  margin: 15px auto;\n  min-width: 90%;\n  width: 90%;\n  box-shadow: none;\n}\n.pcoded[theme-layout=horizontal][pcoded-device-type=phone] .pcoded-navbar .pcoded-item .pcoded-hasmenu .pcoded-submenu .pcoded-hasmenu .pcoded-submenu, .pcoded[theme-layout=horizontal][pcoded-device-type=tablet] .pcoded-navbar .pcoded-item .pcoded-hasmenu .pcoded-submenu .pcoded-hasmenu .pcoded-submenu {\n  min-width: 90%;\n  width: 90%;\n}\n.pcoded[theme-layout=horizontal][pcoded-device-type=phone] .pcoded-navbar .pcoded-item .pcoded-hasmenu .pcoded-submenu .pcoded-hasmenu .pcoded-submenu .pcoded-hasmenu .pcoded-submenu, .pcoded[theme-layout=horizontal][pcoded-device-type=tablet] .pcoded-navbar .pcoded-item .pcoded-hasmenu .pcoded-submenu .pcoded-hasmenu .pcoded-submenu .pcoded-hasmenu .pcoded-submenu {\n  min-width: 90%;\n}\n.pcoded[theme-layout=horizontal] .pcoded-header[pcoded-header-position=relative] ~ .pcoded-main-container {\n  top: -1px;\n}\n.pcoded .pcoded-navbar .pcoded-item .pcoded-submenu > li a .pcoded-badge {\n  top: 7px;\n  right: 20px;\n}\n.pcoded .pcoded-navbar .pcoded-item .pcoded-hasmenu.edge > .pcoded-submenu {\n  left: auto;\n  right: 100%;\n}\n.pcoded-main-container {\n  clear: both;\n}\n.pcoded .pcoded-navbar .pcoded-item:after {\n  display: none;\n}\nbody.horizontal-icon .pcoded[theme-layout=horizontal] .page-header, body.horizontal-icon-fixed .pcoded[theme-layout=horizontal] .page-header {\n  margin-top: 110px;\n}\nbody.horizontal-icon .pcoded[pcoded-device-type=phone][theme-layout=horizontal] .page-header, body.horizontal-icon .pcoded[pcoded-device-type=tablet][theme-layout=horizontal] .page-header, body.horizontal-icon-fixed .pcoded[pcoded-device-type=phone][theme-layout=horizontal] .page-header, body.horizontal-icon-fixed .pcoded[pcoded-device-type=tablet][theme-layout=horizontal] .page-header {\n  padding-top: 10px;\n}\nbody.horizontal-icon .pcoded .pcoded-navbar, body.horizontal-icon-fixed .pcoded .pcoded-navbar {\n  height: 80px;\n}\nbody.horizontal-icon .pcoded .pcoded-navbar .pcoded-item > li > a > .pcoded-micon, body.horizontal-icon-fixed .pcoded .pcoded-navbar .pcoded-item > li > a > .pcoded-micon {\n  display: block;\n  text-align: center;\n  margin: 0 auto;\n}\nbody.horizontal-icon .pcoded .pcoded-navbar .pcoded-item > li.pcoded-hasmenu > a, body.horizontal-icon-fixed .pcoded .pcoded-navbar .pcoded-item > li.pcoded-hasmenu > a {\n  line-height: 30px;\n}\nbody.horizontal-icon .pcoded[pcoded-device-type=desktop] .pcoded-navbar .pcoded-item > li.pcoded-hasmenu > a, body.horizontal-icon-fixed .pcoded[pcoded-device-type=desktop] .pcoded-navbar .pcoded-item > li.pcoded-hasmenu > a {\n  height: 70px;\n}", ""]);
+
+// exports
+
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/admin/auth/LoginUsers.vue?vue&type=style&index=0&id=0a09a7ea&scoped=true&lang=css&":
+/*!***************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader??ref--5-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--5-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/admin/auth/LoginUsers.vue?vue&type=style&index=0&id=0a09a7ea&scoped=true&lang=css& ***!
+  \***************************************************************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/css-loader/lib/css-base.js */ "./node_modules/css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, "\n.login-logo-img[data-v-0a09a7ea] {\n  width: 8%;\n}\n", ""]);
 
 // exports
 
@@ -8017,6 +8187,36 @@ if(false) {}
 
 /***/ }),
 
+/***/ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/admin/auth/LoginUsers.vue?vue&type=style&index=0&id=0a09a7ea&scoped=true&lang=css&":
+/*!*******************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/style-loader!./node_modules/css-loader??ref--5-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--5-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/admin/auth/LoginUsers.vue?vue&type=style&index=0&id=0a09a7ea&scoped=true&lang=css& ***!
+  \*******************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+
+var content = __webpack_require__(/*! !../../../../../node_modules/css-loader??ref--5-1!../../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../../node_modules/postcss-loader/src??ref--5-2!../../../../../node_modules/vue-loader/lib??vue-loader-options!./LoginUsers.vue?vue&type=style&index=0&id=0a09a7ea&scoped=true&lang=css& */ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/admin/auth/LoginUsers.vue?vue&type=style&index=0&id=0a09a7ea&scoped=true&lang=css&");
+
+if(typeof content === 'string') content = [[module.i, content, '']];
+
+var transform;
+var insertInto;
+
+
+
+var options = {"hmr":true}
+
+options.transform = transform
+options.insertInto = undefined;
+
+var update = __webpack_require__(/*! ../../../../../node_modules/style-loader/lib/addStyles.js */ "./node_modules/style-loader/lib/addStyles.js")(content, options);
+
+if(content.locals) module.exports = content.locals;
+
+if(false) {}
+
+/***/ }),
+
 /***/ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/auth/LoginVoters.vue?vue&type=style&index=0&id=02c6bd38&scoped=true&lang=css&":
 /*!**************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/style-loader!./node_modules/css-loader??ref--5-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--5-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/auth/LoginVoters.vue?vue&type=style&index=0&id=02c6bd38&scoped=true&lang=css& ***!
@@ -9146,6 +9346,224 @@ render._withStripped = true
 
 /***/ }),
 
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/admin/auth/LoginUsers.vue?vue&type=template&id=0a09a7ea&scoped=true&":
+/*!************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/admin/auth/LoginUsers.vue?vue&type=template&id=0a09a7ea&scoped=true& ***!
+  \************************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    [
+      _c(
+        "b-form",
+        {
+          staticClass: "md-float-material form-material",
+          on: { submit: _vm.doLogin }
+        },
+        [
+          _c("div", { staticClass: "text-center" }, [
+            _c("img", {
+              staticClass: "img-fluid login-logo-img",
+              attrs: { src: __webpack_require__(/*! ./../../../../images/logo.png */ "./resources/images/logo.png") }
+            })
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "card auth-box" }, [
+            _c(
+              "div",
+              { staticClass: "card-block" },
+              [
+                _c(
+                  "b-row",
+                  { staticClass: "m-b-2" },
+                  [
+                    _c("b-col", { attrs: { md: "12" } }, [
+                      _c("h3", { staticClass: "text-center txt-primary" }, [
+                        _vm._v("Ingreso")
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("b-col", { attrs: { md: "12" } }, [
+                      _c("p", { staticClass: "text-muted text-center p-b-5" }, [
+                        _vm._v("Ingrese su correo y contraseña")
+                      ])
+                    ])
+                  ],
+                  1
+                ),
+                _vm._v(" "),
+                _c(
+                  "b-alert",
+                  {
+                    staticClass: "background-danger",
+                    attrs: {
+                      show: _vm.hasError,
+                      fade: "",
+                      dismissible: "",
+                      variant: "danger"
+                    }
+                  },
+                  [_vm._v(_vm._s(_vm.error))]
+                ),
+                _vm._v(" "),
+                _c(
+                  "b-form-group",
+                  {
+                    staticClass: "form-primary",
+                    attrs: { "label-for": "username" }
+                  },
+                  [
+                    _c("b-form-input", {
+                      ref: "username",
+                      class: {
+                        fill: _vm.fStates.username || _vm.form.username
+                      },
+                      attrs: {
+                        id: "username",
+                        trim: "",
+                        required: "",
+                        disabled: _vm.fStates.isSubmiting,
+                        autofocus: ""
+                      },
+                      on: {
+                        focus: function($event) {
+                          _vm.fStates.username = true
+                        },
+                        blur: function($event) {
+                          _vm.fStates.username = false
+                        }
+                      },
+                      model: {
+                        value: _vm.form.username,
+                        callback: function($$v) {
+                          _vm.$set(_vm.form, "username", $$v)
+                        },
+                        expression: "form.username"
+                      }
+                    }),
+                    _vm._v(" "),
+                    _c("span", { staticClass: "form-bar" }),
+                    _vm._v(" "),
+                    _c("label", { staticClass: "float-label" }, [
+                      _vm._v("Usuario")
+                    ])
+                  ],
+                  1
+                ),
+                _vm._v(" "),
+                _c(
+                  "b-form-group",
+                  {
+                    staticClass: "form-primary",
+                    attrs: { "label-for": "password" }
+                  },
+                  [
+                    _c("b-form-input", {
+                      ref: "password",
+                      class: {
+                        fill: _vm.fStates.password || _vm.form.password
+                      },
+                      attrs: {
+                        type: "password",
+                        id: "password",
+                        trim: "",
+                        required: "",
+                        disabled: _vm.fStates.isSubmiting
+                      },
+                      on: {
+                        focus: function($event) {
+                          _vm.fStates.password = true
+                        },
+                        blur: function($event) {
+                          _vm.fStates.password = false
+                        }
+                      },
+                      model: {
+                        value: _vm.form.password,
+                        callback: function($$v) {
+                          _vm.$set(_vm.form, "password", $$v)
+                        },
+                        expression: "form.password"
+                      }
+                    }),
+                    _vm._v(" "),
+                    _c("span", { staticClass: "form-bar" }),
+                    _vm._v(" "),
+                    _c("label", { staticClass: "float-label" }, [
+                      _vm._v("Contraseña")
+                    ])
+                  ],
+                  1
+                ),
+                _vm._v(" "),
+                _c(
+                  "b-row",
+                  { staticClass: "m-t-30" },
+                  [
+                    _c(
+                      "b-col",
+                      { attrs: { md: "12" } },
+                      [
+                        _c(
+                          "b-button",
+                          {
+                            attrs: {
+                              disabled: _vm.fStates.isSubmiting,
+                              type: "submit",
+                              variant: "primary",
+                              block: ""
+                            }
+                          },
+                          [
+                            !_vm.fStates.isSubmiting
+                              ? _c("span", [_vm._v("INGRESAR")])
+                              : _vm._e(),
+                            _vm._v(" "),
+                            _vm.fStates.isSubmiting
+                              ? _c("feather", {
+                                  attrs: {
+                                    type: "loader",
+                                    animation: "spin",
+                                    "animation-speed": "fast"
+                                  }
+                                })
+                              : _vm._e()
+                          ],
+                          1
+                        )
+                      ],
+                      1
+                    )
+                  ],
+                  1
+                )
+              ],
+              1
+            )
+          ])
+        ]
+      )
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/auth/LoginVoters.vue?vue&type=template&id=02c6bd38&scoped=true&":
 /*!*******************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/auth/LoginVoters.vue?vue&type=template&id=02c6bd38&scoped=true& ***!
@@ -9195,7 +9613,7 @@ var render = function() {
                     _vm._v(" "),
                     _c("b-col", { attrs: { md: "12" } }, [
                       _c("p", { staticClass: "text-muted text-center p-b-5" }, [
-                        _vm._v("Ingrese su correo y contraseña")
+                        _vm._v("Ingrese su Usuario y contraseña")
                       ])
                     ])
                   ],
@@ -14633,6 +15051,93 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/components/admin/auth/LoginUsers.vue":
+/*!***********************************************************!*\
+  !*** ./resources/js/components/admin/auth/LoginUsers.vue ***!
+  \***********************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _LoginUsers_vue_vue_type_template_id_0a09a7ea_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./LoginUsers.vue?vue&type=template&id=0a09a7ea&scoped=true& */ "./resources/js/components/admin/auth/LoginUsers.vue?vue&type=template&id=0a09a7ea&scoped=true&");
+/* harmony import */ var _LoginUsers_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./LoginUsers.vue?vue&type=script&lang=js& */ "./resources/js/components/admin/auth/LoginUsers.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _LoginUsers_vue_vue_type_style_index_0_id_0a09a7ea_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./LoginUsers.vue?vue&type=style&index=0&id=0a09a7ea&scoped=true&lang=css& */ "./resources/js/components/admin/auth/LoginUsers.vue?vue&type=style&index=0&id=0a09a7ea&scoped=true&lang=css&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__["default"])(
+  _LoginUsers_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _LoginUsers_vue_vue_type_template_id_0a09a7ea_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _LoginUsers_vue_vue_type_template_id_0a09a7ea_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  "0a09a7ea",
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/admin/auth/LoginUsers.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/admin/auth/LoginUsers.vue?vue&type=script&lang=js&":
+/*!************************************************************************************!*\
+  !*** ./resources/js/components/admin/auth/LoginUsers.vue?vue&type=script&lang=js& ***!
+  \************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_LoginUsers_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../node_modules/vue-loader/lib??vue-loader-options!./LoginUsers.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/admin/auth/LoginUsers.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_LoginUsers_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/admin/auth/LoginUsers.vue?vue&type=style&index=0&id=0a09a7ea&scoped=true&lang=css&":
+/*!********************************************************************************************************************!*\
+  !*** ./resources/js/components/admin/auth/LoginUsers.vue?vue&type=style&index=0&id=0a09a7ea&scoped=true&lang=css& ***!
+  \********************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_5_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_5_2_node_modules_vue_loader_lib_index_js_vue_loader_options_LoginUsers_vue_vue_type_style_index_0_id_0a09a7ea_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/style-loader!../../../../../node_modules/css-loader??ref--5-1!../../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../../node_modules/postcss-loader/src??ref--5-2!../../../../../node_modules/vue-loader/lib??vue-loader-options!./LoginUsers.vue?vue&type=style&index=0&id=0a09a7ea&scoped=true&lang=css& */ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/admin/auth/LoginUsers.vue?vue&type=style&index=0&id=0a09a7ea&scoped=true&lang=css&");
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_5_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_5_2_node_modules_vue_loader_lib_index_js_vue_loader_options_LoginUsers_vue_vue_type_style_index_0_id_0a09a7ea_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_5_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_5_2_node_modules_vue_loader_lib_index_js_vue_loader_options_LoginUsers_vue_vue_type_style_index_0_id_0a09a7ea_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__);
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_5_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_5_2_node_modules_vue_loader_lib_index_js_vue_loader_options_LoginUsers_vue_vue_type_style_index_0_id_0a09a7ea_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_5_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_5_2_node_modules_vue_loader_lib_index_js_vue_loader_options_LoginUsers_vue_vue_type_style_index_0_id_0a09a7ea_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_5_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_5_2_node_modules_vue_loader_lib_index_js_vue_loader_options_LoginUsers_vue_vue_type_style_index_0_id_0a09a7ea_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0___default.a); 
+
+/***/ }),
+
+/***/ "./resources/js/components/admin/auth/LoginUsers.vue?vue&type=template&id=0a09a7ea&scoped=true&":
+/*!******************************************************************************************************!*\
+  !*** ./resources/js/components/admin/auth/LoginUsers.vue?vue&type=template&id=0a09a7ea&scoped=true& ***!
+  \******************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_LoginUsers_vue_vue_type_template_id_0a09a7ea_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib??vue-loader-options!./LoginUsers.vue?vue&type=template&id=0a09a7ea&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/admin/auth/LoginUsers.vue?vue&type=template&id=0a09a7ea&scoped=true&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_LoginUsers_vue_vue_type_template_id_0a09a7ea_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_LoginUsers_vue_vue_type_template_id_0a09a7ea_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
 /***/ "./resources/js/components/auth/LoginVoters.vue":
 /*!******************************************************!*\
   !*** ./resources/js/components/auth/LoginVoters.vue ***!
@@ -15599,10 +16104,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./store */ "./resources/js/store.js");
 /* harmony import */ var _components_auth_LoginVoters__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/auth/LoginVoters */ "./resources/js/components/auth/LoginVoters.vue");
 /* harmony import */ var _components_vote__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./components/vote */ "./resources/js/components/vote/index.vue");
+/* harmony import */ var _components_admin_auth_LoginUsers__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./components/admin/auth/LoginUsers */ "./resources/js/components/admin/auth/LoginUsers.vue");
 
 
 
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]); // Components
+
 
 
 
@@ -15615,7 +16122,7 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
     beforeEnter: function beforeEnter(to, from, next) {
       if (_store__WEBPACK_IMPORTED_MODULE_2__["store"].getters.loggedIn) {
         next({
-          name: 'home'
+          name: 'vote'
         });
       } else {
         next();
@@ -15628,6 +16135,24 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
     meta: {
       requiresAuth: true
     }
+  }, {
+    path: '/voteadmin',
+    name: 'voteadmin',
+    component: _components_admin_auth_LoginUsers__WEBPACK_IMPORTED_MODULE_5__["default"],
+    beforeEnter: function beforeEnter(to, from, next) {
+      // TODO validate role
+      if (_store__WEBPACK_IMPORTED_MODULE_2__["store"].getters.loggedIn) {
+        next({
+          name: 'vote'
+        });
+      } else {
+        next();
+      }
+    },
+    children: [{
+      path: 'dashboard',
+      name: 'admin-dashboard'
+    }]
   }]
 });
 /* harmony default export */ __webpack_exports__["default"] = (router);
