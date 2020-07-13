@@ -11,6 +11,7 @@ use Auth;
 use Illuminate\Support\Facades\Auth as FacadesAuth;
 use App\Rules\CanLoginAgain;
 use App\Models\User;
+use Carbon\Carbon;
 
 class LoginController extends Controller
 {
@@ -63,10 +64,15 @@ class LoginController extends Controller
             $this->isVoter = true;
         }
 
-        $this->validateLogin($request);
+        $this->validateFieldsLogin($request);
 
         if ($this->isVoter) {
-            if (!$this->validateLoginForVoters($request)) {
+
+            if (!$this->appAvailable()) {
+                return response()->json(["message" => 'El sistema se encuentra disponible en este momento'], 401);
+            }
+
+            if (!$this->validateIfUserVoted($request)) {
                 return response()->json(["message" => 'Usted ya ejerció su derecho al voto, gracias por participar'], 401);
             }
         }
@@ -158,10 +164,46 @@ class LoginController extends Controller
      *
      * @throws \Illuminate\Validation\ValidationException
      */
-    protected function validateLoginForVoters(Request $request)
+    protected function validateIfUserVoted(Request $request)
     {
         $user =  User::where($this->username(), $request->get($this->username()))->whereEnabled(1)->first();
         if (!$user) return false;
         return true;
+    }
+    
+
+     /**
+     * Validate the user login request.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return void
+     *
+     * @throws \Illuminate\Validation\ValidationException
+     */
+    protected function validateFieldsLogin(Request $request)
+    {
+        $request->validate([
+            $this->username() => 'required|string',
+            'password' => 'required|string',
+        ]);
+    }
+
+    /**
+     * Verifica si el sistema está disponible para votaciones
+     *
+     * @return void
+     */
+    public function appAvailable()
+    {
+        $appAvailableFrom = Carbon::parse(config('votes.app-available-from'));
+        $appAvailableUntil =Carbon::parse(config('votes.app-available-until'));
+        $now = Carbon::now();
+    
+        dd($now);
+       if($now->between($appAvailableFrom, $appAvailableUntil) ) {
+           dd("entra");
+           return true;
+       }
+       return false;
     }
 }
