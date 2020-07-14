@@ -1,6 +1,6 @@
 <template>
   <div>
-    <b-form class="md-float-material form-material" @submit="doLogin">
+    <b-form class="md-float-material form-material" v-on="{submit: hasUser ? doLogin : getUser  }">
       <div class="text-center">
         <img src="./../../../images/logo.png" class="img-fluid login-logo-img" />
       </div>
@@ -11,7 +11,8 @@
               <h3 class="text-center txt-primary">Ingreso</h3>
             </b-col>
             <b-col md="12">
-              <p class="text-muted text-center p-b-5">Ingrese su Usuario y contraseña</p>
+              <p class="text-muted text-center p-b-5" v-if="!hasUser">Ingrese su cédula</p>
+              <p class="text-muted text-center p-b-5" v-if="hasUser">Ingrese su clave</p>
             </b-col>
           </b-row>
           <b-alert
@@ -22,7 +23,7 @@
             class="background-danger"
           >{{error}}</b-alert>
 
-          <b-form-group class="form-primary" label-for="identification">
+          <b-form-group class="form-primary" label-for="identification" v-if="!hasUser">
             <b-form-input
               id="identification"
               ref="identification"
@@ -34,11 +35,18 @@
               @blur="fStates.identification = false"
               :disabled="fStates.isSubmiting"
               autofocus
+              maxlength="10"
             ></b-form-input>
             <span class="form-bar"></span>
             <label class="float-label">Cédula</label>
           </b-form-group>
-          <b-form-group class="form-primary" label-for="password">
+
+          <b-form-group class="form-primary" label-for="identification" v-if="hasUser">
+            <p class="text-center text-muted">Hola, {{nameOfUser}}</p>
+          </b-form-group>
+
+
+          <b-form-group class="form-primary" label-for="password" v-if="hasUser">
             <b-form-input
               type="password"
               id="password"
@@ -58,7 +66,7 @@
           <b-row class="m-t-30">
             <b-col md="12">
               <b-button :disabled="fStates.isSubmiting" type="submit" variant="primary" block>
-                <span v-if="!fStates.isSubmiting">INGRESAR</span>
+                <span v-if="!fStates.isSubmiting">SIGUIENTE</span>
                 <feather
                   v-if="fStates.isSubmiting"
                   type="loader"
@@ -75,10 +83,14 @@
 </template>
 
 <script>
+import axios from "axios";
+
 export default {
   name: "LoginVoters",
   data() {
     return {
+      hasUser: false,
+      nameOfUser: "",
       form: {
         identification: "",
         password: "",
@@ -97,6 +109,33 @@ export default {
   methods: {
     setFocusPassword() {
       this.$refs.password.$el.focus();
+    },
+    getUser(e) {
+      if (!this.form.identification) {
+        this.hasError = true;
+        this.error = "Cédula Requerida";
+        e.preventDefault();
+        e.stopPropagation();
+        return false;
+      }
+
+      e.preventDefault();
+      e.stopPropagation();
+      this.hasError = false;
+      this.fStates.isSubmiting = true;
+      axios
+        .post("/api/getName", { identification: this.form.identification })
+        .then(result => {
+          this.hasUser = true;
+          this.nameOfUser = result.data.data.name;
+          console.log(result);
+        })
+        .catch(reason => {
+          let response = reason.response;
+          this.error = response.data.message;
+          this.hasError = true;
+        })
+        .then(() => (this.fStates.isSubmiting = false));
     },
     doLogin(e) {
       if (!this.form.identification && !this.form.password) {

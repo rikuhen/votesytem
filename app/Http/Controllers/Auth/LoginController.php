@@ -71,10 +71,6 @@ class LoginController extends Controller
             if (!$this->appAvailableForVote()) {
                 return response()->json(["message" => 'El sistema se encuentra disponible en este momento'], 401);
             }
-
-            if (!$this->validateIfUserVoted($request)) {
-                return response()->json(["message" => 'Usted ya ejerció su derecho al voto, gracias por participar'], 401);
-            }
         }
 
 
@@ -172,7 +168,7 @@ class LoginController extends Controller
     }
 
 
-     /**
+    /**
      * Validate the user login request.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -200,14 +196,39 @@ class LoginController extends Controller
 
 
         $appAvailableFrom = Carbon::parse(config('votes.app-available-from'));
-        $appAvailableUntil =Carbon::parse(config('votes.app-available-until'));
+        $appAvailableUntil = Carbon::parse(config('votes.app-available-until'));
         $now = Carbon::now();
 
         dd($now);
-       if($now->between($appAvailableFrom, $appAvailableUntil) ) {
-           dd("entra");
-           return true;
-       }
-       return false;
+        if ($now->between($appAvailableFrom, $appAvailableUntil)) {
+            dd("entra");
+            return true;
+        }
+        return false;
+    }
+
+
+    /**
+     * Verifica el usuario en base a la cedula
+     *
+     * @param Request $request
+     * @return void
+     */
+    public function getName(Request $request)
+    {
+        
+        if (!$this->validateIfUserVoted($request)) {
+            return response()->json(["message" => 'Usted ya ejerció su derecho al voto, gracias por participar'], 401);
+        }
+        
+        $user = User::select('name')
+                ->where('identification', $request->get('identification'))
+                ->first();
+
+        if ($user) {
+            return (new  UserResource($user));
+        }
+
+        return response()->json(['message' => 'No existe entre nuestros registros'], 404);
     }
 }

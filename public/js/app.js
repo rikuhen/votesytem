@@ -267,6 +267,8 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
 //
 //
 //
@@ -343,10 +345,21 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "LoginVoters",
   data: function data() {
     return {
+      hasUser: false,
+      nameOfUser: "",
       form: {
         identification: "",
         password: "",
@@ -365,8 +378,37 @@ __webpack_require__.r(__webpack_exports__);
     setFocusPassword: function setFocusPassword() {
       this.$refs.password.$el.focus();
     },
-    doLogin: function doLogin(e) {
+    getUser: function getUser(e) {
       var _this = this;
+
+      if (!this.form.identification) {
+        this.hasError = true;
+        this.error = "Cédula Requerida";
+        e.preventDefault();
+        e.stopPropagation();
+        return false;
+      }
+
+      e.preventDefault();
+      e.stopPropagation();
+      this.hasError = false;
+      this.fStates.isSubmiting = true;
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a.post("/api/getName", {
+        identification: this.form.identification
+      }).then(function (result) {
+        _this.hasUser = true;
+        _this.nameOfUser = result.data.data.name;
+        console.log(result);
+      })["catch"](function (reason) {
+        var response = reason.response;
+        _this.error = response.data.message;
+        _this.hasError = true;
+      }).then(function () {
+        return _this.fStates.isSubmiting = false;
+      });
+    },
+    doLogin: function doLogin(e) {
+      var _this2 = this;
 
       if (!this.form.identification && !this.form.password) {
         this.hasError = true;
@@ -402,10 +444,10 @@ __webpack_require__.r(__webpack_exports__);
         is_voter: 1
       });
       promise.then(function (response) {
-        _this.$store.dispatch("getUser").then(function (result) {
-          _this.$store.commit("SET_LAYOUT", "app-layout");
+        _this2.$store.dispatch("getUser").then(function (result) {
+          _this2.$store.commit("SET_LAYOUT", "app-layout");
 
-          _this.$router.push({
+          _this2.$router.push({
             name: "vote"
           });
         });
@@ -414,17 +456,17 @@ __webpack_require__.r(__webpack_exports__);
         var status = response.status;
 
         if (status == 422) {
-          _this.error = "Cédula o Clave erronea";
+          _this2.error = "Cédula o Clave erronea";
         } else {
-          _this.error = response.data.message;
+          _this2.error = response.data.message;
         }
 
-        _this.hasError = true;
-        _this.form.password = "";
+        _this2.hasError = true;
+        _this2.form.password = "";
 
-        _this.setFocusPassword();
+        _this2.setFocusPassword();
       }).then(function () {
-        return _this.fStates.isSubmiting = false;
+        return _this2.fStates.isSubmiting = false;
       });
     }
   }
@@ -9762,10 +9804,10 @@ var render = function() {
     [
       _c(
         "b-form",
-        {
-          staticClass: "md-float-material form-material",
-          on: { submit: _vm.doLogin }
-        },
+        _vm._g(
+          { staticClass: "md-float-material form-material" },
+          { submit: _vm.hasUser ? _vm.doLogin : _vm.getUser }
+        ),
         [
           _c("div", { staticClass: "text-center" }, [
             _c("img", {
@@ -9790,9 +9832,21 @@ var render = function() {
                     ]),
                     _vm._v(" "),
                     _c("b-col", { attrs: { md: "12" } }, [
-                      _c("p", { staticClass: "text-muted text-center p-b-5" }, [
-                        _vm._v("Ingrese su Usuario y contraseña")
-                      ])
+                      !_vm.hasUser
+                        ? _c(
+                            "p",
+                            { staticClass: "text-muted text-center p-b-5" },
+                            [_vm._v("Ingrese su cédula")]
+                          )
+                        : _vm._e(),
+                      _vm._v(" "),
+                      _vm.hasUser
+                        ? _c(
+                            "p",
+                            { staticClass: "text-muted text-center p-b-5" },
+                            [_vm._v("Ingrese su clave")]
+                          )
+                        : _vm._e()
                     ])
                   ],
                   1
@@ -9812,96 +9866,117 @@ var render = function() {
                   [_vm._v(_vm._s(_vm.error))]
                 ),
                 _vm._v(" "),
-                _c(
-                  "b-form-group",
-                  {
-                    staticClass: "form-primary",
-                    attrs: { "label-for": "identification" }
-                  },
-                  [
-                    _c("b-form-input", {
-                      ref: "identification",
-                      class: {
-                        fill:
-                          _vm.fStates.identification || _vm.form.identification
+                !_vm.hasUser
+                  ? _c(
+                      "b-form-group",
+                      {
+                        staticClass: "form-primary",
+                        attrs: { "label-for": "identification" }
                       },
-                      attrs: {
-                        id: "identification",
-                        trim: "",
-                        required: "",
-                        disabled: _vm.fStates.isSubmiting,
-                        autofocus: ""
-                      },
-                      on: {
-                        focus: function($event) {
-                          _vm.fStates.identification = true
-                        },
-                        blur: function($event) {
-                          _vm.fStates.identification = false
-                        }
-                      },
-                      model: {
-                        value: _vm.form.identification,
-                        callback: function($$v) {
-                          _vm.$set(_vm.form, "identification", $$v)
-                        },
-                        expression: "form.identification"
-                      }
-                    }),
-                    _vm._v(" "),
-                    _c("span", { staticClass: "form-bar" }),
-                    _vm._v(" "),
-                    _c("label", { staticClass: "float-label" }, [
-                      _vm._v("Cédula")
-                    ])
-                  ],
-                  1
-                ),
+                      [
+                        _c("b-form-input", {
+                          ref: "identification",
+                          class: {
+                            fill:
+                              _vm.fStates.identification ||
+                              _vm.form.identification
+                          },
+                          attrs: {
+                            id: "identification",
+                            trim: "",
+                            required: "",
+                            disabled: _vm.fStates.isSubmiting,
+                            autofocus: "",
+                            maxlength: "10"
+                          },
+                          on: {
+                            focus: function($event) {
+                              _vm.fStates.identification = true
+                            },
+                            blur: function($event) {
+                              _vm.fStates.identification = false
+                            }
+                          },
+                          model: {
+                            value: _vm.form.identification,
+                            callback: function($$v) {
+                              _vm.$set(_vm.form, "identification", $$v)
+                            },
+                            expression: "form.identification"
+                          }
+                        }),
+                        _vm._v(" "),
+                        _c("span", { staticClass: "form-bar" }),
+                        _vm._v(" "),
+                        _c("label", { staticClass: "float-label" }, [
+                          _vm._v("Cédula")
+                        ])
+                      ],
+                      1
+                    )
+                  : _vm._e(),
                 _vm._v(" "),
-                _c(
-                  "b-form-group",
-                  {
-                    staticClass: "form-primary",
-                    attrs: { "label-for": "password" }
-                  },
-                  [
-                    _c("b-form-input", {
-                      ref: "password",
-                      class: {
-                        fill: _vm.fStates.password || _vm.form.password
+                _vm.hasUser
+                  ? _c(
+                      "b-form-group",
+                      {
+                        staticClass: "form-primary",
+                        attrs: { "label-for": "identification" }
                       },
-                      attrs: {
-                        type: "password",
-                        id: "password",
-                        trim: "",
-                        required: "",
-                        disabled: _vm.fStates.isSubmiting
+                      [
+                        _c("p", { staticClass: "text-center text-muted" }, [
+                          _vm._v("Hola, " + _vm._s(_vm.nameOfUser))
+                        ])
+                      ]
+                    )
+                  : _vm._e(),
+                _vm._v(" "),
+                _vm.hasUser
+                  ? _c(
+                      "b-form-group",
+                      {
+                        staticClass: "form-primary",
+                        attrs: { "label-for": "password" }
                       },
-                      on: {
-                        focus: function($event) {
-                          _vm.fStates.password = true
-                        },
-                        blur: function($event) {
-                          _vm.fStates.password = false
-                        }
-                      },
-                      model: {
-                        value: _vm.form.password,
-                        callback: function($$v) {
-                          _vm.$set(_vm.form, "password", $$v)
-                        },
-                        expression: "form.password"
-                      }
-                    }),
-                    _vm._v(" "),
-                    _c("span", { staticClass: "form-bar" }),
-                    _vm._v(" "),
-                    _c("label", { staticClass: "float-label" }, [
-                      _vm._v("Contraseña")
-                    ])
-                  ],
-                  1
-                ),
+                      [
+                        _c("b-form-input", {
+                          ref: "password",
+                          class: {
+                            fill: _vm.fStates.password || _vm.form.password
+                          },
+                          attrs: {
+                            type: "password",
+                            id: "password",
+                            trim: "",
+                            required: "",
+                            disabled: _vm.fStates.isSubmiting
+                          },
+                          on: {
+                            focus: function($event) {
+                              _vm.fStates.password = true
+                            },
+                            blur: function($event) {
+                              _vm.fStates.password = false
+                            }
+                          },
+                          model: {
+                            value: _vm.form.password,
+                            callback: function($$v) {
+                              _vm.$set(_vm.form, "password", $$v)
+                            },
+                            expression: "form.password"
+                          }
+                        }),
+                        _vm._v(" "),
+                        _c("span", { staticClass: "form-bar" }),
+                        _vm._v(" "),
+                        _c("label", { staticClass: "float-label" }, [
+                          _vm._v("Contraseña")
+                        ])
+                      ],
+                      1
+                    )
+                  : _vm._e(),
                 _vm._v(" "),
                 _c(
                   "b-row",
@@ -9923,7 +9998,7 @@ var render = function() {
                           },
                           [
                             !_vm.fStates.isSubmiting
-                              ? _c("span", [_vm._v("INGRESAR")])
+                              ? _c("span", [_vm._v("SIGUIENTE")])
                               : _vm._e(),
                             _vm._v(" "),
                             _vm.fStates.isSubmiting
