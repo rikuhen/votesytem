@@ -18,7 +18,7 @@ class CandidateController extends Controller
      */
     public function index()
     {
-        $customers = Candidate::where('enabled','1')
+        $customers = Candidate::with('members')->where('enabled','1')
         ->orderBy('name','asc')
         ->orderBy('type','asc')
         ->get();

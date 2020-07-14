@@ -27,8 +27,8 @@ class CandidateTableSeeder extends Seeder
         ]);
 
         Candidate::create([
-            'name' => 'Lista A',
-            'description' => 'Lista A',
+            'name' => 'Lista 1',
+            'description' => 'Lista 1',
             'enabled' => 1,
             'type' => 'candidate',
         ]);

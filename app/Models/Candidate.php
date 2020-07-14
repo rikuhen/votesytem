@@ -13,4 +13,10 @@ class Candidate extends Model
         'enabled',
         'type',
     ];
+
+
+    public function members()
+    {
+        return $this->hasMany(\App\Models\MembersCandidate::class,'candidate_id');
+    }
 }
