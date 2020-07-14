@@ -110,10 +110,10 @@ export default {
       });
       promise
         .then(response => {
-          this.$store.commit("SET_LAYOUT", "app-layout");
-          localStorage.setItem("menu", "voter");
-          this.$store.commit("SET_MENUS", "voter");
-          this.$router.push({ name: "vote" });
+          this.$store.dispatch("getUser").then(result => {
+            this.$store.commit("SET_LAYOUT", "app-layout");
+            this.$router.push({ name: "vote" });
+          });
         })
         .catch(exception => {
           let response = exception.response;

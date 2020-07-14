@@ -26,6 +26,22 @@
           </a>
         </b-link>
 
+         <b-link
+          router-tag="li"
+          class="is-hover pcoded-trigger"
+          subitem-icon="style1"
+          dropdown-icon="style1"
+          v-if="menuRole == 'admin' || menuRole == 'supervisor'"
+          :to="{name: 'admin-dashboard'}"
+        >
+          <a class="waves-effect waves-dark">
+            <span class="pcoded-micon">
+              <feather type="activity" class="icon-sidebar" size="14"></feather>
+            </span>
+            <span class="pcoded-mtext">Escritorio</span>
+          </a>
+        </b-link>
+
         <!-- <b-link
           v-for="(menu,index) in menus"
           v-bind:key="menu.id"
@@ -81,14 +97,12 @@ export default {
     };
   },
   methods: {},
-  created() {
-    this.menuRole = this.$store.getters.getMenus;
-  },
   mounted() {
     this.$root.$on(
       "toggle-mobile-menu",
       value => (this.showMobileMenu = value)
     );
+    this.menuRole = this.$store.getters.getMenus;
   }
 };
 </script>

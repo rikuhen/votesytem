@@ -71,6 +71,7 @@
         </div>
       </div>
     </b-form>
+    <router-view></router-view>
   </div>
 </template>
 
@@ -105,14 +106,14 @@ export default {
       this.hasError = false;
       let promise = this.$store.dispatch("retrieveToken", {
         username: this.form.username,
-        password: this.form.password,
+        password: this.form.password
       });
       promise
         .then(response => {
-          this.$store.commit("SET_LAYOUT", "app-layout");
-          localStorage.setItem("menu", "user");
-          this.$store.commit("SET_MENUS", "user");
-          this.$router.push({ name: "admin-dashboard" });
+          this.$store.dispatch("getUser").then(result => {
+            this.$store.commit("SET_LAYOUT", "app-layout");
+            this.$router.push({ name: "admin-dashboard" });
+          });
         })
         .catch(exception => {
           let response = exception.response;

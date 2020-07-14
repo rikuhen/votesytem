@@ -7,6 +7,10 @@ import axios from 'axios';
 
 Vue.use(Vuex);
 
+let getTypeMenu = (user) => {
+    return user.role
+ }
+
 export const store = new Vuex.Store({
     state: {
         layout: 'auth-layout',
@@ -88,6 +92,11 @@ export const store = new Vuex.Store({
                     axios.post('/api/user-info', '', {
                         headers: { Authorization: "Bearer " + context.state.token }
                     }).then(response => {
+
+                        let menu = getTypeMenu(response.data.data)
+
+                        localStorage.setItem("menu", menu);
+                        context.commit("SET_MENUS", menu);
                         context.commit('SET_USER', response.data.data)
                         resolve(response.data);
                     })

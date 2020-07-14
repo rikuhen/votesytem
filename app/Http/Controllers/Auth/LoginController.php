@@ -68,9 +68,9 @@ class LoginController extends Controller
 
         if ($this->isVoter) {
 
-            // if (!$this->appAvailable()) {
-            //     return response()->json(["message" => 'El sistema se encuentra disponible en este momento'], 401);
-            // }
+            if (!$this->appAvailableForVote()) {
+                return response()->json(["message" => 'El sistema se encuentra disponible en este momento'], 401);
+            }
 
             if (!$this->validateIfUserVoted($request)) {
                 return response()->json(["message" => 'Usted ya ejerció su derecho al voto, gracias por participar'], 401);
@@ -193,10 +193,10 @@ class LoginController extends Controller
      *
      * @return void
      */
-    public function appAvailable()
+    public function appAvailableForVote()
     {
 
-        return config('app.enable-for-voters');
+        return config('votes.enable-for-voters');
 
 
         $appAvailableFrom = Carbon::parse(config('votes.app-available-from'));
