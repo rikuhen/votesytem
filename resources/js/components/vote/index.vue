@@ -22,7 +22,13 @@
                 </b-button>
               </b-col>
               <b-col md="6" sm="12" v-if="candidate.type == 'candidate'">
-                <b-button variant="info" size="md" class="waves-effect waves-light" block>
+                <b-button
+                  variant="info"
+                  size="md"
+                  class="waves-effect waves-light"
+                  block
+                  @click="showMembers(candidate.members)"
+                >
                   <feather type="users" size="13px"></feather>Miembros
                 </b-button>
               </b-col>
@@ -30,6 +36,21 @@
           </div>
         </div>
       </b-col>
+
+      <b-modal id="modal-members" title="Miembros" size="lg" ok-only scrollable>
+        <b-row>
+          <b-col md="6" sm="12" v-for="member in membersOnModal" :key="member.id">
+            <div class="card comp-card">
+              <div class="card-body">
+                <div class="col">
+                  <h6 class="m-b-25">{{member.position}}</h6>
+                  <h5 class="f-w-700 text-c-blue">{{member.name}}</h5>
+                </div>
+              </div>
+            </div>
+          </b-col>
+        </b-row>
+      </b-modal>
     </content-main-content-component>
   </div>
 </template>
@@ -47,7 +68,8 @@ export default {
   },
   data() {
     return {
-      candidates: []
+      candidates: [],
+      membersOnModal: []
     };
   },
   methods: {
@@ -113,6 +135,11 @@ export default {
         }
       });
       return await promise.data.message;
+    },
+
+    showMembers(members) {
+      this.membersOnModal = members;
+      this.$bvModal.show("modal-members");
     },
     logout() {
       this.$store.dispatch("destroyToken").then(response => {

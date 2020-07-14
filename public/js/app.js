@@ -1000,6 +1000,27 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -1012,7 +1033,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   },
   data: function data() {
     return {
-      candidates: []
+      candidates: [],
+      membersOnModal: []
     };
   },
   methods: {
@@ -1119,6 +1141,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           }
         }, _callee2);
       }))();
+    },
+    showMembers: function showMembers(members) {
+      this.membersOnModal = members;
+      this.$bvModal.show("modal-members");
     },
     logout: function logout() {
       var _this2 = this;
@@ -10541,96 +10567,146 @@ var render = function() {
       _vm._v(" "),
       _c(
         "content-main-content-component",
-        _vm._l(_vm.candidates, function(candidate) {
-          return _c(
-            "b-col",
-            { key: candidate.id, attrs: { lg: "4", sm: "6" } },
-            [
-              _c("div", { staticClass: "card social-card" }, [
-                _c("div", { staticClass: "card-body text-center" }, [
-                  _c(
-                    "h3",
-                    { staticClass: "text-facebook m-b-20" },
-                    [_c("feather", { attrs: { type: "edit" } })],
-                    1
-                  ),
-                  _vm._v(" "),
-                  _c("h4", { staticClass: "text-facebook f-w-700" }, [
-                    _vm._v(_vm._s(candidate.description))
-                  ])
-                ]),
-                _vm._v(" "),
-                _c(
-                  "div",
-                  { staticClass: "card-footer" },
-                  [
+        [
+          _vm._l(_vm.candidates, function(candidate) {
+            return _c(
+              "b-col",
+              { key: candidate.id, attrs: { lg: "4", sm: "6" } },
+              [
+                _c("div", { staticClass: "card social-card" }, [
+                  _c("div", { staticClass: "card-body text-center" }, [
                     _c(
-                      "b-row",
-                      [
-                        _c(
-                          "b-col",
-                          { attrs: { md: "6", sm: "12" } },
-                          [
-                            _c(
-                              "b-button",
-                              {
-                                attrs: { block: "", variant: "primary" },
-                                on: {
-                                  click: function($event) {
-                                    return _vm.showMessageForVote(candidate)
-                                  }
-                                }
-                              },
-                              [
-                                _c("feather", {
-                                  attrs: { type: "thumbs-up", size: "13px" }
-                                }),
-                                _vm._v("Votar\n              ")
-                              ],
-                              1
-                            )
-                          ],
-                          1
-                        ),
-                        _vm._v(" "),
-                        candidate.type == "candidate"
-                          ? _c(
-                              "b-col",
-                              { attrs: { md: "6", sm: "12" } },
-                              [
-                                _c(
-                                  "b-button",
-                                  {
-                                    staticClass: "waves-effect waves-light",
-                                    attrs: {
-                                      variant: "info",
-                                      size: "md",
-                                      block: ""
-                                    }
-                                  },
-                                  [
-                                    _c("feather", {
-                                      attrs: { type: "users", size: "13px" }
-                                    }),
-                                    _vm._v("Miembros\n              ")
-                                  ],
-                                  1
-                                )
-                              ],
-                              1
-                            )
-                          : _vm._e()
-                      ],
+                      "h3",
+                      { staticClass: "text-facebook m-b-20" },
+                      [_c("feather", { attrs: { type: "edit" } })],
                       1
-                    )
-                  ],
-                  1
-                )
-              ])
-            ]
+                    ),
+                    _vm._v(" "),
+                    _c("h4", { staticClass: "text-facebook f-w-700" }, [
+                      _vm._v(_vm._s(candidate.description))
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    { staticClass: "card-footer" },
+                    [
+                      _c(
+                        "b-row",
+                        [
+                          _c(
+                            "b-col",
+                            { attrs: { md: "6", sm: "12" } },
+                            [
+                              _c(
+                                "b-button",
+                                {
+                                  attrs: { block: "", variant: "primary" },
+                                  on: {
+                                    click: function($event) {
+                                      return _vm.showMessageForVote(candidate)
+                                    }
+                                  }
+                                },
+                                [
+                                  _c("feather", {
+                                    attrs: { type: "thumbs-up", size: "13px" }
+                                  }),
+                                  _vm._v("Votar\n              ")
+                                ],
+                                1
+                              )
+                            ],
+                            1
+                          ),
+                          _vm._v(" "),
+                          candidate.type == "candidate"
+                            ? _c(
+                                "b-col",
+                                { attrs: { md: "6", sm: "12" } },
+                                [
+                                  _c(
+                                    "b-button",
+                                    {
+                                      staticClass: "waves-effect waves-light",
+                                      attrs: {
+                                        variant: "info",
+                                        size: "md",
+                                        block: ""
+                                      },
+                                      on: {
+                                        click: function($event) {
+                                          return _vm.showMembers(
+                                            candidate.members
+                                          )
+                                        }
+                                      }
+                                    },
+                                    [
+                                      _c("feather", {
+                                        attrs: { type: "users", size: "13px" }
+                                      }),
+                                      _vm._v("Miembros\n              ")
+                                    ],
+                                    1
+                                  )
+                                ],
+                                1
+                              )
+                            : _vm._e()
+                        ],
+                        1
+                      )
+                    ],
+                    1
+                  )
+                ])
+              ]
+            )
+          }),
+          _vm._v(" "),
+          _c(
+            "b-modal",
+            {
+              attrs: {
+                id: "modal-members",
+                title: "Miembros",
+                size: "lg",
+                "ok-only": "",
+                scrollable: ""
+              }
+            },
+            [
+              _c(
+                "b-row",
+                _vm._l(_vm.membersOnModal, function(member) {
+                  return _c(
+                    "b-col",
+                    { key: member.id, attrs: { md: "6", sm: "12" } },
+                    [
+                      _c("div", { staticClass: "card comp-card" }, [
+                        _c("div", { staticClass: "card-body" }, [
+                          _c("div", { staticClass: "col" }, [
+                            _c("h6", { staticClass: "m-b-25" }, [
+                              _vm._v(_vm._s(member.position))
+                            ]),
+                            _vm._v(" "),
+                            _c("h5", { staticClass: "f-w-700 text-c-blue" }, [
+                              _vm._v(_vm._s(member.name))
+                            ])
+                          ])
+                        ])
+                      ])
+                    ]
+                  )
+                }),
+                1
+              )
+            ],
+            1
           )
-        }),
-        1
+        ],
+        2
       )
     ],
     1
