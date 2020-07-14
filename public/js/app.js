@@ -401,6 +401,7 @@ __webpack_require__.r(__webpack_exports__);
         _this.nameOfUser = result.data.data.name;
       })["catch"](function (reason) {
         var response = reason.response;
+        _this.form.identification = '';
         _this.error = response.data.message;
         _this.hasError = true;
       }).then(function () {

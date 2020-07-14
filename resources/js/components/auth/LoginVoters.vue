@@ -132,6 +132,7 @@ export default {
         })
         .catch(reason => {
           let response = reason.response;
+          this.form.identification = '';
           this.error = response.data.message;
           this.hasError = true;
         })

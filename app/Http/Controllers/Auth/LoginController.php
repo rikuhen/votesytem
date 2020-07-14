@@ -216,11 +216,13 @@ class LoginController extends Controller
      */
     public function getName(Request $request)
     {
-        
+
+        $this->isVoter = true;
+
         if (!$this->validateIfUserVoted($request)) {
             return response()->json(["message" => 'Usted ya ejerció su derecho al voto, gracias por participar'], 401);
         }
-        
+
         $user = User::select('name')
                 ->where('identification', $request->get('identification'))
                 ->first();
