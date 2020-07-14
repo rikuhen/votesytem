@@ -353,6 +353,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "LoginVoters",
@@ -398,7 +399,6 @@ __webpack_require__.r(__webpack_exports__);
       }).then(function (result) {
         _this.hasUser = true;
         _this.nameOfUser = result.data.data.name;
-        console.log(result);
       })["catch"](function (reason) {
         var response = reason.response;
         _this.error = response.data.message;
@@ -9924,9 +9924,14 @@ var render = function() {
                         attrs: { "label-for": "identification" }
                       },
                       [
-                        _c("p", { staticClass: "text-center text-muted" }, [
-                          _vm._v("Hola, " + _vm._s(_vm.nameOfUser))
-                        ])
+                        _c(
+                          "p",
+                          {
+                            staticClass:
+                              "text-center text-primary font-weight-bolder"
+                          },
+                          [_vm._v("HOLA, " + _vm._s(_vm.nameOfUser))]
+                        )
                       ]
                     )
                   : _vm._e(),
@@ -9997,8 +10002,12 @@ var render = function() {
                             }
                           },
                           [
-                            !_vm.fStates.isSubmiting
+                            !_vm.fStates.isSubmitDing && !_vm.hasUser
                               ? _c("span", [_vm._v("SIGUIENTE")])
+                              : _vm._e(),
+                            _vm._v(" "),
+                            !_vm.fStates.isSubmitDing && _vm.hasUser
+                              ? _c("span", [_vm._v("INGRESAR")])
                               : _vm._e(),
                             _vm._v(" "),
                             _vm.fStates.isSubmiting

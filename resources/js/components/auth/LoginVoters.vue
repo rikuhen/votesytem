@@ -42,7 +42,7 @@
           </b-form-group>
 
           <b-form-group class="form-primary" label-for="identification" v-if="hasUser">
-            <p class="text-center text-muted">Hola, {{nameOfUser}}</p>
+            <p class="text-center text-primary font-weight-bolder">HOLA, {{nameOfUser}}</p>
           </b-form-group>
 
 
@@ -66,7 +66,8 @@
           <b-row class="m-t-30">
             <b-col md="12">
               <b-button :disabled="fStates.isSubmiting" type="submit" variant="primary" block>
-                <span v-if="!fStates.isSubmiting">SIGUIENTE</span>
+                <span v-if="!fStates.isSubmitDing && !hasUser">SIGUIENTE</span>
+                <span v-if="!fStates.isSubmitDing && hasUser">INGRESAR</span>
                 <feather
                   v-if="fStates.isSubmiting"
                   type="loader"
@@ -128,7 +129,6 @@ export default {
         .then(result => {
           this.hasUser = true;
           this.nameOfUser = result.data.data.name;
-          console.log(result);
         })
         .catch(reason => {
           let response = reason.response;
