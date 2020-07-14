@@ -368,6 +368,30 @@ __webpack_require__.r(__webpack_exports__);
     doLogin: function doLogin(e) {
       var _this = this;
 
+      if (!this.form.identification && !this.form.password) {
+        this.hasError = true;
+        this.error = "Favor ingresar cédula y clave";
+        e.preventDefault();
+        e.stopPropagation();
+        return false;
+      }
+
+      if (!this.form.identification) {
+        this.hasError = true;
+        this.error = "Cédula Requerida";
+        e.preventDefault();
+        e.stopPropagation();
+        return false;
+      }
+
+      if (!this.form.password) {
+        this.hasError = true;
+        this.error = "Clave Requerida";
+        e.preventDefault();
+        e.stopPropagation();
+        return false;
+      }
+
       e.preventDefault();
       e.stopPropagation();
       this.fStates.isSubmiting = true;
