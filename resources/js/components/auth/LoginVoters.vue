@@ -45,7 +45,6 @@
             <p class="text-center text-primary font-weight-bolder">HOLA, {{nameOfUser}}</p>
           </b-form-group>
 
-
           <b-form-group class="form-primary" label-for="password" v-if="hasUser">
             <b-form-input
               type="password"
@@ -132,7 +131,7 @@ export default {
         })
         .catch(reason => {
           let response = reason.response;
-          this.form.identification = '';
+          this.form.identification = "";
           this.error = response.data.message;
           this.hasError = true;
         })
@@ -198,6 +197,11 @@ export default {
 
 <style  scoped>
 .login-logo-img {
-  width: 17%;
+  width: 22%;
+}
+@media only screen and (max-width: 992px) {
+  .login-logo-img {
+    width: 50%;
+  }
 }
 </style>

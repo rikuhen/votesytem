@@ -3023,7 +3023,7 @@ table tbody .border-bottom-info td, table tbody .border-bottom-info th, table th
 }
 
 .header-navbar .navbar-wrapper .navbar-logo[logo-theme=theme1] {
-    background: #42a5f5
+    background: #ffffff
 }
 
 .header-navbar .navbar-wrapper .navbar-logo[logo-theme=theme2] {
@@ -4477,7 +4477,7 @@ table tbody .border-bottom-info td, table tbody .border-bottom-info th, table th
 }
 
 body[themebg-pattern=theme1] {
-    background-color: #42a5f5
+    background-color: #e8e8e8
 }
 
 body[themebg-pattern=theme2] {
@@ -6974,11 +6974,11 @@ body[themebg-pattern=theme6] {
 }
 
 .pcoded .pcoded-header[header-theme=theme1] {
-    background: #42a5f5
+    background: #ffffff
 }
 
 .pcoded .pcoded-header[header-theme=theme1] .dropdown-toggle, .pcoded .pcoded-header[header-theme=theme1] .input-group-addon, .pcoded .pcoded-header[header-theme=theme1] a {
-    color: #fff
+    color: #000
 }
 
 .pcoded .pcoded-header[header-theme=theme2] {

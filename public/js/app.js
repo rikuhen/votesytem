@@ -702,7 +702,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "LoginVoters",
@@ -750,7 +749,7 @@ __webpack_require__.r(__webpack_exports__);
         _this.nameOfUser = result.data.data.name;
       })["catch"](function (reason) {
         var response = reason.response;
-        _this.form.identification = '';
+        _this.form.identification = "";
         _this.error = response.data.message;
         _this.hasError = true;
       }).then(function () {
@@ -17796,7 +17795,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/c
 
 
 // module
-exports.push([module.i, "\n.login-logo-img[data-v-0a09a7ea] {\n  width: 17%;\n}\n", ""]);
+exports.push([module.i, "\n.login-logo-img[data-v-0a09a7ea] {\n  width: 22%;\n}\n@media only screen and (max-width: 992px) {\n.login-logo-img[data-v-0a09a7ea] {\n    width: 50%;\n}\n}\n", ""]);
 
 // exports
 
@@ -17815,7 +17814,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n.login-logo-img[data-v-02c6bd38] {\n  width: 17%;\n}\n", ""]);
+exports.push([module.i, "\n.login-logo-img[data-v-02c6bd38] {\n  width: 22%;\n}\n@media only screen and (max-width: 992px) {\n.login-logo-img[data-v-02c6bd38] {\n    width: 50%;\n}\n}\n", ""]);
 
 // exports
 
