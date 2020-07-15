@@ -247,6 +247,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "CardResult",
   props: {
@@ -261,6 +264,10 @@ __webpack_require__.r(__webpack_exports__);
     place: {
       type: Number,
       "default": 0
+    },
+    icon: {
+      type: String,
+      "default": ""
     }
   }
 });
@@ -401,6 +408,27 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -417,6 +445,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   data: function data() {
     return {
       results: [],
+      totalVoters: 0,
+      totalHaveVoted: 0,
+      totalHaveNotVoted: 0,
       loadResultsVotes: false,
       dataForChart: {
         labels: [],
@@ -462,6 +493,96 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       }
 
       this.loadResultsVotes = true;
+    },
+    loadTotalVoters: function loadTotalVoters() {
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2() {
+        var response;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                _context2.next = 2;
+                return axios__WEBPACK_IMPORTED_MODULE_5___default.a.get("/api/get-total-voters", {
+                  headers: {
+                    Authorization: "Bearer " + localStorage.getItem("token")
+                  }
+                });
+
+              case 2:
+                response = _context2.sent;
+                _context2.next = 5;
+                return response.data.data;
+
+              case 5:
+                return _context2.abrupt("return", _context2.sent);
+
+              case 6:
+              case "end":
+                return _context2.stop();
+            }
+          }
+        }, _callee2);
+      }))();
+    },
+    loadTotalHaveVoted: function loadTotalHaveVoted() {
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3() {
+        var response;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee3$(_context3) {
+          while (1) {
+            switch (_context3.prev = _context3.next) {
+              case 0:
+                _context3.next = 2;
+                return axios__WEBPACK_IMPORTED_MODULE_5___default.a.get("/api/get-total-has-voted", {
+                  headers: {
+                    Authorization: "Bearer " + localStorage.getItem("token")
+                  }
+                });
+
+              case 2:
+                response = _context3.sent;
+                _context3.next = 5;
+                return response.data.data;
+
+              case 5:
+                return _context3.abrupt("return", _context3.sent);
+
+              case 6:
+              case "end":
+                return _context3.stop();
+            }
+          }
+        }, _callee3);
+      }))();
+    },
+    loadTotalHaveNotVoted: function loadTotalHaveNotVoted() {
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee4() {
+        var response;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee4$(_context4) {
+          while (1) {
+            switch (_context4.prev = _context4.next) {
+              case 0:
+                _context4.next = 2;
+                return axios__WEBPACK_IMPORTED_MODULE_5___default.a.get("/api/get-total-has-not-voted", {
+                  headers: {
+                    Authorization: "Bearer " + localStorage.getItem("token")
+                  }
+                });
+
+              case 2:
+                response = _context4.sent;
+                _context4.next = 5;
+                return response.data.data;
+
+              case 5:
+                return _context4.abrupt("return", _context4.sent);
+
+              case 6:
+              case "end":
+                return _context4.stop();
+            }
+          }
+        }, _callee4);
+      }))();
     }
   },
   mounted: function mounted() {
@@ -471,6 +592,15 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       _this.results = data;
 
       _this.formatDataForChart(data);
+    });
+    this.loadTotalVoters().then(function (result) {
+      return _this.totalVoters = result.toString();
+    });
+    this.loadTotalHaveVoted().then(function (result) {
+      return _this.totalHaveVoted = result;
+    });
+    this.loadTotalHaveNotVoted().then(function (result) {
+      return _this.totalHaveNotVoted = result;
     });
   }
 });
@@ -47345,16 +47475,32 @@ var render = function() {
           ])
         ]),
         _vm._v(" "),
-        _c("div", { staticClass: "col-auto bg-c-blue rounded" }, [
-          _c(
-            "h6",
-            {
-              staticClass:
-                "text-center align-middle m-0 p-2 text-white font-weight-bolder"
-            },
-            [_vm._v(_vm._s(_vm.place))]
-          )
-        ])
+        _vm.place
+          ? _c("div", { staticClass: "col-auto bg-c-blue rounded" }, [
+              _c(
+                "h6",
+                {
+                  staticClass:
+                    "text-center align-middle m-0 p-2 text-white font-weight-bolder"
+                },
+                [_vm._v(_vm._s(_vm.place))]
+              )
+            ])
+          : _vm._e(),
+        _vm._v(" "),
+        _vm.icon
+          ? _c(
+              "div",
+              { staticClass: "col-auto" },
+              [
+                _c("feather", {
+                  staticClass: "text-c-red f-18",
+                  attrs: { type: _vm.icon }
+                })
+              ],
+              1
+            )
+          : _vm._e()
       ])
     ])
   ])
@@ -47457,6 +47603,51 @@ var render = function() {
                 }
               })
             }),
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "b-col",
+            { attrs: { xl: "4", sm: "12" } },
+            [
+              _c("card-result", {
+                attrs: {
+                  name: "Padron Electoral",
+                  count: _vm.totalVoters + " Votantes",
+                  icon: "users"
+                }
+              })
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "b-col",
+            { attrs: { xl: "4", sm: "12" } },
+            [
+              _c("card-result", {
+                attrs: {
+                  name: "Han votado",
+                  count: _vm.totalHaveVoted + " Personas",
+                  icon: "check-circle"
+                }
+              })
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "b-col",
+            { attrs: { xl: "4", sm: "12" } },
+            [
+              _c("card-result", {
+                attrs: {
+                  name: "No Han votado",
+                  count: _vm.totalHaveNotVoted + " Personas",
+                  icon: "alert-octagon"
+                }
+              })
+            ],
             1
           )
         ],
@@ -53417,14 +53608,15 @@ __webpack_require__.r(__webpack_exports__);
 /*!*******************************************************************!*\
   !*** ./resources/js/components/admin/dashboard/UserDashboard.vue ***!
   \*******************************************************************/
-/*! exports provided: default */
+/*! no static exports found */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _UserDashboard_vue_vue_type_template_id_8d250a9a___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./UserDashboard.vue?vue&type=template&id=8d250a9a& */ "./resources/js/components/admin/dashboard/UserDashboard.vue?vue&type=template&id=8d250a9a&");
 /* harmony import */ var _UserDashboard_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./UserDashboard.vue?vue&type=script&lang=js& */ "./resources/js/components/admin/dashboard/UserDashboard.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _UserDashboard_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _UserDashboard_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
 
@@ -53454,7 +53646,7 @@ component.options.__file = "resources/js/components/admin/dashboard/UserDashboar
 /*!********************************************************************************************!*\
   !*** ./resources/js/components/admin/dashboard/UserDashboard.vue?vue&type=script&lang=js& ***!
   \********************************************************************************************/
-/*! exports provided: default */
+/*! no static exports found */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
