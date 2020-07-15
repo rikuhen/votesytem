@@ -2,7 +2,7 @@
   <div>
     <b-form class="md-float-material form-material" v-on="{submit: hasUser ? doLogin : getUser  }">
       <div class="text-center">
-        <img src="./../../../images/logo.png" class="img-fluid login-logo-img" />
+        <img src="./../../../images/logo.svg" class="img-fluid login-logo-img" />
       </div>
       <div class="card auth-box">
         <div class="card-block">
@@ -198,6 +198,6 @@ export default {
 
 <style  scoped>
 .login-logo-img {
-  width: 8%;
+  width: 17%;
 }
 </style>
