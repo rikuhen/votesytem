@@ -2,7 +2,7 @@
   <div>
     <b-form class="md-float-material form-material" v-on="{submit: hasUser ? doLogin : getUser  }">
       <div class="text-center">
-        <img src="./../../../images/logo.png" class="img-fluid login-logo-img" />
+        <img src="./../../../images/logo.svg" class="img-fluid login-logo-img" />
       </div>
       <div class="card auth-box">
         <div class="card-block">
@@ -44,7 +44,6 @@
           <b-form-group class="form-primary" label-for="identification" v-if="hasUser">
             <p class="text-center text-primary font-weight-bolder">HOLA, {{nameOfUser}}</p>
           </b-form-group>
-
 
           <b-form-group class="form-primary" label-for="password" v-if="hasUser">
             <b-form-input
@@ -132,7 +131,7 @@ export default {
         })
         .catch(reason => {
           let response = reason.response;
-          this.form.identification = '';
+          this.form.identification = "";
           this.error = response.data.message;
           this.hasError = true;
         })
@@ -198,6 +197,11 @@ export default {
 
 <style  scoped>
 .login-logo-img {
-  width: 8%;
+  width: 22%;
+}
+@media only screen and (max-width: 992px) {
+  .login-logo-img {
+    width: 50%;
+  }
 }
 </style>

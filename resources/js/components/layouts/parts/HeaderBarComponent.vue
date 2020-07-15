@@ -8,7 +8,7 @@
       <div class="navbar-logo" logo-theme="theme1">
         <!-- TODO LOGO -->
         <b-link :to="{name:'vote'}" go>
-          <img src="./../../../../images/logo.png" class="mx-auto w-25 img-fluid" />
+          <img src="./../../../../images/logo.svg" class="mx-auto w-100 img-fluid" />
         </b-link>
 
         <a

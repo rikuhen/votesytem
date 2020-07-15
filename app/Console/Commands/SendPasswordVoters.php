@@ -13,7 +13,7 @@ class SendPasswordVoters extends Command
      *
      * @var string
      */
-    protected $signature = 'send-passwords-voters';
+    protected $signature = 'send-passwords-voters {email?}';
 
     /**
      * The console command description.
@@ -39,19 +39,32 @@ class SendPasswordVoters extends Command
      */
     public function handle()
     {
-        $options = $this->arguments();
-        if ( count($options) > 1 ) {
-            return $this->error("this command don't accept arguments");
-        }
+        $email = $this->argument('email');
 
-        $users = User::where('role','voter')
+        if (!$email) {
+            //Envia a todos los usuarios quienes no se haya notificado
+            $users = User::where('role', 'voter')
                 ->whereEnabled(1)
                 ->whereObservation('no-notificated')
                 ->take(5)
                 ->get();
 
-        foreach ($users as $key => $user) {
-            $user->sendPassword();
+            foreach ($users as $key => $user) {
+                $user->sendPassword();
+            }
+        } else {
+            //Busca un usuario por su correo y envia la notificacion sin importar que haya o no recibido la notificacion
+            
+            $user = User::where('role', 'voter')
+                ->whereEnabled(1)
+                ->whereEmail($email)
+                ->first();
+
+            if ($user) {
+                $user->sendPassword();
+            } else {
+                $this->info("No se puede enviar la contraseña a este usuario probablemente ya haya votado");
+            }
         }
     }
 }
