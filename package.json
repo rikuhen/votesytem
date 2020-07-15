@@ -30,7 +30,6 @@
         "chart.js": "^2.9.3",
         "feather-icons": "^4.28.0",
         "sweetalert": "^2.1.2",
-        "vue-chartjs": "^3.5.0",
         "vue-feather": "^1.0.1"
     }
 }

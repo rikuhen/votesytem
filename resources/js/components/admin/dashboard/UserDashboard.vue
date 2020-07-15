@@ -7,7 +7,9 @@
     ></content-header-component>
     <content-main-content-component>
       <!-- Barra de resultados -->
-      <b-col xl="9" md="12"></b-col>
+      <b-col xl="9" md="12">
+        <chart-results v-if="loadResultsVotes" labelDataSet="Conteo de Votos" :labels="this.dataForChart.labels" :data="this.dataForChart.data"></chart-results>
+      </b-col>
 
       <b-col xl="3" md="12">
         <card-result
@@ -26,6 +28,7 @@
 import ContentHeaderComponent from "./../../layouts/parts/ContentHeaderComponent";
 import ContentMainContentComponent from "./../../layouts/parts/ContentMainContentComponent";
 import CardResult from "./CardResult";
+import ChartResults from "./ChartResults";
 
 import axios from "axios";
 
@@ -34,11 +37,17 @@ export default {
   components: {
     ContentHeaderComponent,
     ContentMainContentComponent,
-    CardResult
+    CardResult,
+    ChartResults
   },
   data() {
     return {
-      results: []
+      results: [],
+      loadResultsVotes: false,
+      dataForChart: {
+        labels: [],
+        data: []
+      }
     };
   },
   methods: {
@@ -46,12 +55,22 @@ export default {
       const response = await axios.get("/api/get-total-votes", {
         headers: { Authorization: "Bearer " + localStorage.getItem("token") }
       });
-      //   debugger
+
       return await response.data.data;
+    },
+    formatDataForChart(data) {
+      for (let index = 0; index < data.length; index++) {
+        this.dataForChart.labels.push(data[index]["name"]);
+        this.dataForChart.data.push(data[index]["point"] || 0);
+      }
+      this.loadResultsVotes = true;
     }
   },
   mounted() {
-    this.loadNumVotesCandidates().then(data => (this.results = data));
+    this.loadNumVotesCandidates().then(data => {
+      this.results = data;
+      this.formatDataForChart(data);
+    });
   }
 };
 </script>
