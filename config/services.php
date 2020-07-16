@@ -15,8 +15,8 @@ return [
     */
 
     'mailgun' => [
-        'domain' => env('MAILGUN_DOMAIN','mg.comitegpg.com'),
-        'secret' => env('MAILGUN_SECRET','4049b69e66128e512ab317d3e2a9d462-a83a87a9-57807faf'),
+        'domain' => env('MAILGUN_DOMAIN','SOMETHING'),
+        'secret' => env('MAILGUN_SECRET','SOMETHING'),
         'endpoint' => env('MAILGUN_ENDPOINT', 'api.mailgun.net'),
     ],
 
