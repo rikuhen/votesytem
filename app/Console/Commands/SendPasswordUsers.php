@@ -46,7 +46,7 @@ class SendPasswordUsers extends Command
             $users = User::where('role', 'supervisor')
                 ->whereEnabled(1)
                 // ->whereObservation('no-notificated')
-                ->take(5)
+                ->take(3)
                 ->get();
 
             foreach ($users as $key => $user) {
