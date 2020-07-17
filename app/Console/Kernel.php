@@ -26,7 +26,7 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        $schedule->command('send-passwords-voters')->everyFiveMinutes();
+        $schedule->command('send-passwords-voters')->everyMinute();
     }
 
     /**
