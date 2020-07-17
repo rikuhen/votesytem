@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\voterResource;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class VoterController extends Controller
@@ -11,9 +13,14 @@ class VoterController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $sortBY = $request->has('sortBy') ? $request->get('sortBy') : 'name';
+        $sortDesc = $request->has('sortDesc') ? 'desc' : 'asc';
+        // dd($sortBY,$sortDesc);
+        $voters = User::where('role', 'voter')->orderBy($sortBY, $sortDesc)->paginate();
+
+        return voterResource::collection($voters);
     }
 
     /**

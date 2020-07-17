@@ -26,7 +26,7 @@
           </a>
         </b-link>
 
-         <b-link
+        <b-link
           router-tag="li"
           class="is-hover pcoded-trigger"
           subitem-icon="style1"
@@ -39,6 +39,22 @@
               <feather type="activity" class="icon-sidebar" size="14"></feather>
             </span>
             <span class="pcoded-mtext">Escritorio</span>
+          </a>
+        </b-link>
+
+        <b-link
+          router-tag="li"
+          class="is-hover pcoded-trigger"
+          subitem-icon="style1"
+          dropdown-icon="style1"
+          v-if="menuRole == 'admin' || menuRole == 'supervisor'"
+          :to="{name: 'list-voters'}"
+        >
+          <a class="waves-effect waves-dark">
+            <span class="pcoded-micon">
+              <feather type="users" class="icon-sidebar" size="14"></feather>
+            </span>
+            <span class="pcoded-mtext">Votantes</span>
           </a>
         </b-link>
 

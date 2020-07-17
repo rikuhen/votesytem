@@ -8,8 +8,9 @@ Vue.use(VueRouter);
 import LoginVoters from './components/auth/LoginVoters';
 import VoteViewComponent from './components/vote';
 import AdminTemplate from './components/admin/AdminTemplate';
-import LoginUsers from './components/admin/auth/LoginUsers'
-import UserDashboard from './components/admin/dashboard/UserDashboard'
+import LoginUsers from './components/admin/auth/LoginUsers';
+import UserDashboard from './components/admin/dashboard/UserDashboard';
+import ListVoters from './components/admin/voters/index';
 
 const hasAnyRole = (roles) => {
     // store.dispatch("getUser").then(user => {
@@ -67,6 +68,14 @@ const router = new VueRouter({
                     path: 'dashboard',
                     name: 'admin-dashboard',
                     component: UserDashboard,
+                    meta: {
+                        requiresAuth: true
+                    }
+                },
+                {
+                    path: 'voters',
+                    name: 'list-voters',
+                    component: ListVoters,
                     meta: {
                         requiresAuth: true
                     }

@@ -30,4 +30,5 @@ Route::middleware(['auth:api'])->group(function () {
     Route::get('get-total-voters','ReporterController@getTotalVoters');
     Route::get('get-total-has-voted','ReporterController@getTotalVotersHaveVoted');
     Route::get('get-total-has-not-voted','ReporterController@getTotalVotersHaveNotVoted');
+    Route::get('voters','VoterController@index');
 });
