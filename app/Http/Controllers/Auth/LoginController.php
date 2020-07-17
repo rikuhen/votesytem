@@ -66,12 +66,6 @@ class LoginController extends Controller
 
         $this->validateFieldsLogin($request);
 
-        if ($this->isVoter) {
-
-            if (!$this->appAvailableForVote()) {
-                return response()->json(["message" => 'El sistema se encuentra disponible en este momento'], 401);
-            }
-        }
 
 
 
@@ -219,15 +213,19 @@ class LoginController extends Controller
 
         $this->isVoter = true;
 
-        if (!$this->validateIfUserVoted($request)) {
-            return response()->json(["message" => 'Usted ya ejerció su derecho al voto, gracias por participar'], 401);
+        if (!$this->appAvailableForVote()) {
+            return response()->json(["message" => 'El sistema se encuentra disponible en este momento'], 401);
         }
 
         $user = User::select('name')
-                ->where('identification', $request->get('identification'))
-                ->first();
+            ->where('identification', $request->get('identification'))
+            ->first();
 
         if ($user) {
+            if (!$this->validateIfUserVoted($request)) {
+                return response()->json(["message" => 'Usted ya ejerció su derecho al voto, gracias por participar'], 401);
+            }
+
             return (new  UserResource($user));
         }
 
