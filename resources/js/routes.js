@@ -12,14 +12,12 @@ import LoginUsers from './components/admin/auth/LoginUsers';
 import UserDashboard from './components/admin/dashboard/UserDashboard';
 import ListVoters from './components/admin/voters/index';
 
-const hasAnyRole = (roles) => {
-    // store.dispatch("getUser").then(user => {
-    //     let hasRole = roles.contains(user.role)
-    //     console.log(hasRole);
-    // })
-    console.log(store.getters.getUser);
-
+const hasRole = (role) => {
+    let menu = localStorage.getItem('menu')
+    return role == menu;
 }
+
+
 
 const router = new VueRouter({
     mode: 'history',
@@ -40,9 +38,15 @@ const router = new VueRouter({
             path: '/vote',
             name: 'vote',
             component: VoteViewComponent,
-            meta: {
-                requiresAuth: true
+            beforeEnter: (to, from, next) => {
+                if (hasRole('voter')) {
+                    next();
+                } else {
+                    store.commit("SET_LAYOUT", "auth-layout");
+                    next(false);
+                }
             }
+
         },
         {
             path: '/voteadmin',
@@ -68,16 +72,26 @@ const router = new VueRouter({
                     path: 'dashboard',
                     name: 'admin-dashboard',
                     component: UserDashboard,
-                    meta: {
-                        requiresAuth: true
+                    beforeEnter: (to, from, next) => {
+                        if (hasRole('supervisor') || hasRole('admin')) {
+                            next();
+                        } else {
+                            // store.commit("SET_LAYOUT", "auth-layout");
+                            next(false);
+                        }
                     }
                 },
                 {
                     path: 'voters',
                     name: 'list-voters',
                     component: ListVoters,
-                    meta: {
-                        requiresAuth: true
+                    beforeEnter: (to, from, next) => {
+                        if (hasRole('supervisor') || hasRole('admin')) {
+                            next();
+                        } else {
+                            // store.commit("SET_LAYOUT", "auth-layout");
+                            next(false);
+                        }
                     }
                 }
             ]
