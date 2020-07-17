@@ -6,6 +6,11 @@
       </div>
       <div class="card auth-box">
         <div class="card-block">
+          <b-row>
+            <b-col cols="12">
+              <h6 class="text-info text-center">Elecciones 2020-2022</h6>
+            </b-col>
+          </b-row>
           <b-row class="m-b-2">
             <b-col md="12">
               <h3 class="text-center txt-primary">Ingreso</h3>
