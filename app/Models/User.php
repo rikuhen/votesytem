@@ -9,6 +9,7 @@ use Laravel\Passport\HasApiTokens;
 use Illuminate\Database\Eloquent\Builder;
 use App\Notifications\ThankForVote;
 use App\Notifications\SetPasswordForVoters;
+use App\Notifications\SetPasswordForUsers;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Hash;
 
@@ -59,7 +60,11 @@ class User extends Authenticatable
         $when = now()->addMinute();
         $password = Str::random(8);
         $hashedPassword = Hash::make($password);
-        $this->notify((new SetPasswordForVoters($password))->delay($when));
+        if ($this->role == 'voter') {
+            $this->notify((new SetPasswordForVoters($password))->delay($when));
+        } else {
+            $this->notify((new SetPasswordForUsers($password))->delay($when));
+        }
         $this->password = $hashedPassword;
         $this->observation = "notificated";
         $this->save();
