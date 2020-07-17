@@ -214,7 +214,7 @@ class LoginController extends Controller
         $this->isVoter = true;
 
         if (!$this->appAvailableForVote()) {
-            return response()->json(["message" => 'El sistema se encuentra disponible en este momento'], 401);
+            return response()->json(["message" => 'El sistema no se encuentra disponible en este momento'], 401);
         }
 
         $user = User::select('name')
