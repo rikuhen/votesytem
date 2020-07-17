@@ -12,7 +12,7 @@ class UsersTableSeeder extends Seeder
      */
     public function run()
     {
-        // $password = Hash::make('password');
+        $password = Hash::make('password');
         //Admin
         User::create([
             'identification' => '000000000',
@@ -21,7 +21,7 @@ class UsersTableSeeder extends Seeder
             'role' => 'admin',
             'enabled' => 1,
             'email' => 'info@thejlmedia.com',
-            // 'password' => $password, // password
+            'password' => $password, // password
             'remember_token' => Str::random(10),
         ]);
 
