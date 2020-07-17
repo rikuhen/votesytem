@@ -41,6 +41,12 @@
           icon="alert-octagon"
         ></card-result>
       </b-col>
+
+      <b-col cols="12">
+        <a class="btn btn-info btn-sm" href="/report-results" target="_blank" role="button">
+          <feather type="printer" size="14px"></feather>Imprimir
+        </a>
+      </b-col>
     </content-main-content-component>
   </div>
 </template>

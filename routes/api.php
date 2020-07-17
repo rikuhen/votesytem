@@ -23,6 +23,7 @@ Route::post('logout', 'Auth\LoginController@logout')->middleware('auth:api');
 
 Route::post('vote', 'VoteController@store')->middleware(['auth:api','isVoter']);
 
+
 Route::middleware(['auth:api'])->group(function () {
     Route::resource('candidates', 'CandidateController');
     Route::resource('candidates.members', 'MembersCandidateController');

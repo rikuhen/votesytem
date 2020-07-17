@@ -9,6 +9,11 @@
     <content-main-content-component>
       <b-col cols="12">
         <div class="card sale-card">
+          <b-col xl="3" sm="6" class="p-2">
+            <a class="btn btn-info btn-sm" href="/report-voters" target="_blank" role="button">
+              <feather type="printer" size="14px"></feather>Imprimir
+            </a>
+          </b-col>
           <div class="card-header">
             <h3>Votantes</h3>
           </div>
@@ -120,14 +125,13 @@ export default {
       });
 
       return response.then(result => {
-        // debugger;
         this.paginationOptions.totalItems = result.data.meta.total;
         this.paginationOptions.perPage = result.data.meta.per_page;
         this.paginationOptions.currentPage = result.data.meta.current_page;
         this.isBusy = false;
         return result.data.data;
       });
-    }
+    },
   },
   mounted() {
     this.loadVoters();
