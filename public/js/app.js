@@ -17970,7 +17970,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/c
 
 
 // module
-exports.push([module.i, "\n.login-logo-img[data-v-0a09a7ea] {\n  width: 22%;\n}\n@media only screen and (max-width: 992px) {\n.login-logo-img[data-v-0a09a7ea] {\n    width: 50%;\n}\n}\n", ""]);
+exports.push([module.i, "\n.login-logo-img[data-v-0a09a7ea] {\n  width: 9%;\n}\n@media only screen and (max-width: 992px) {\n.login-logo-img[data-v-0a09a7ea] {\n    width: 50%;\n}\n}\n", ""]);
 
 // exports
 
@@ -17989,7 +17989,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n.login-logo-img[data-v-02c6bd38] {\n  width: 22%;\n}\n@media only screen and (max-width: 992px) {\n.login-logo-img[data-v-02c6bd38] {\n    width: 50%;\n}\n}\n", ""]);
+exports.push([module.i, "\n.login-logo-img[data-v-02c6bd38] {\n  width: 9%;\n}\n@media only screen and (max-width: 992px) {\n.login-logo-img[data-v-02c6bd38] {\n    width: 50%;\n}\n}\n", ""]);
 
 // exports
 

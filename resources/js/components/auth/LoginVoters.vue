@@ -202,7 +202,7 @@ export default {
 
 <style  scoped>
 .login-logo-img {
-  width: 22%;
+  width: 9%;
 }
 @media only screen and (max-width: 992px) {
   .login-logo-img {
