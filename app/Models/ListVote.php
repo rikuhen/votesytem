@@ -4,19 +4,18 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Candidate extends Model
+class ListVote extends Model
 {
     protected $fillable = [
         'name',
         'description',
         'img_path',
         'enabled',
-        'type',
     ];
 
 
-    public function members()
+    public function candidates()
     {
-        return $this->hasMany(\App\Models\MembersCandidate::class,'candidate_id');
+        return $this->hasMany(\App\Models\CandidateListVote::class,'candidate_id');
     }
 }
