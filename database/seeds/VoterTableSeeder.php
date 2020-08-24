@@ -16,25 +16,27 @@ class VoterTableSeeder extends Seeder
         // factory(Voter::class,30)->create();
         $fileVoters = storage_path('app/public/voters.csv');
 
-        $fileHandler = fopen($fileVoters, 'r');
+        if (file_exists($fileVoters)) {
+            $fileHandler = fopen($fileVoters, 'r');
 
-        while (!feof($fileHandler)) {
-            $line = fgetcsv($fileHandler, 0, ',');
-            if ($line) {
-                User::create(
-                    [
-                        'identification' => $line[0],
-                        'name' => ltrim($line[1]),
-                        'email' => $line[2],
-                        // 'password' => Hash::make('password'), // password
-                        'role' => 'voter',
-                        'enabled' => 1,
-                        'observation' => 'no-notificated'
-                    ]
+            while (!feof($fileHandler)) {
+                $line = fgetcsv($fileHandler, 0, ',');
+                if ($line) {
+                    User::create(
+                        [
+                            'identification' => $line[0],
+                            'name' => ltrim($line[1]),
+                            'email' => $line[2],
+                            // 'password' => Hash::make('password'), // password
+                            'role' => 'voter',
+                            'enabled' => 1,
+                            'observation' => 'no-notificated'
+                        ]
 
-                );
+                    );
+                }
             }
+            fclose($fileHandler);
         }
-        fclose($fileHandler);
     }
 }
