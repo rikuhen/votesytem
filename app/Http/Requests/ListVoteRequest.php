@@ -3,9 +3,10 @@
 namespace App\Http\Requests;
 
 use App\Http\Requests\ValidationInterface;
+use Illuminate\Validation\Rule;
 use Illuminate\Foundation\Http\FormRequest;
 
-class CandidateRequest extends FormRequest implements ValidationInterface
+class ListVoteRequest extends FormRequest implements ValidationInterface
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -29,13 +30,12 @@ class CandidateRequest extends FormRequest implements ValidationInterface
         } else {
             return $this->validateOnUpdate();
         }
-
     }
 
     public function validateOnSave()
     {
         return [
-            'name' => 'required|string|max:50|unique:candidates',
+            'name' => 'required|string|max:50|unique:list_votes',
             'description' => 'required',
             'enabled' => 'boolean',
             'type' => 'in:regular,nulled,white',
@@ -46,9 +46,8 @@ class CandidateRequest extends FormRequest implements ValidationInterface
     public function validateOnUpdate()
     {
         $rules = $this->validateOnSave();
-        $candidateId = $this->route('candidate');
-        $rules['name'] = 'required|string|max:50|unique:candidates,id,'.$candidateId;
-        return $rules; 
-
+        $listId = $this->route('list');
+        $rules['name'] = ['required', 'string', 'max:50', Rule::unique('list_votes')->ignore($listId)];
+        return $rules;
     }
 }

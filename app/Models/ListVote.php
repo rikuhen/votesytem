@@ -16,6 +16,6 @@ class ListVote extends Model
 
     public function candidates()
     {
-        return $this->hasMany(\App\Models\CandidateListVote::class,'candidate_id');
+        return $this->hasMany(\App\Models\CandidateListVote::class,'list_id');
     }
 }

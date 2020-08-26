@@ -1,6 +1,5 @@
 <?php
 
-use Illuminate\Http\Request;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,7 +24,8 @@ Route::post('vote', 'VoteController@store')->middleware(['auth:api','isVoter']);
 
 
 Route::middleware(['auth:api'])->group(function () {
-    Route::resource('candidates', 'CandidateController');
+    Route::resource('dignities', 'DignityController');
+    Route::resource('list-votes', 'ListVoteController');
     Route::resource('candidates.members', 'MembersCandidateController');
     Route::get('get-total-votes','ReporterController@getTotalVotes');
     Route::get('get-total-voters','ReporterController@getTotalVoters');
