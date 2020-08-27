@@ -11,4 +11,10 @@ class Dignity extends Model
         'mode_vote',
         'state'
     ];
+
+
+    public function lists()
+    {
+        return $this->belongsToMany(App\Models\ListVote::class);
+    }
 }

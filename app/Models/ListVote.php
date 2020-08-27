@@ -18,4 +18,9 @@ class ListVote extends Model
     {
         return $this->hasMany(\App\Models\CandidateListVote::class,'list_id');
     }
+
+    public function dignities()
+    {
+        return $this->belongsToMany(\App\Models\CandidateListVote::class);
+    }
 }
