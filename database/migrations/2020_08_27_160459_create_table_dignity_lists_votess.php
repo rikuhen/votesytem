@@ -13,9 +13,9 @@ class CreateTableDignityListsVotess extends Migration
      */
     public function up()
     {
-        Schema::create('dignity_list_votes', function (Blueprint $table) {
+        Schema::create('dignity_list_vote', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer('dignities_id');
+            $table->integer('dignity_id');
             $table->integer('list_vote_id');
             $table->timestamps();
         });
@@ -28,6 +28,6 @@ class CreateTableDignityListsVotess extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('dignity_list_votes');
+        Schema::dropIfExists('dignity_list_vote');
     }
 }

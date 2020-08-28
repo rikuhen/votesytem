@@ -15,6 +15,6 @@ class Dignity extends Model
 
     public function lists()
     {
-        return $this->belongsToMany(App\Models\ListVote::class);
+        return $this->belongsToMany(\App\Models\ListVote::class);
     }
 }

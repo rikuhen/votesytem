@@ -20,7 +20,7 @@ class DignityController extends Controller
      */
     public function index()
     {
-        $dignities = Dignity::all();
+        $dignities = Dignity::where('state', '1')->where('mode_vote', 'list')->get();
         return DignityResource::collection($dignities);
     }
 
@@ -40,9 +40,9 @@ class DignityController extends Controller
             $dignity->saveOrFail();
             DB::commit();
             return new DignityResource($dignity);
-        }catch(Exception $e) {
+        } catch (Exception $e) {
             DB::rollback();
-            return response()->json(['message' => 'Hubo un error al ingresar la dignidad a elegir, intente nuevamente', 'details'=>  $e->getMessage()],411);
+            return response()->json(['message' => 'Hubo un error al ingresar la dignidad a elegir, intente nuevamente', 'details' =>  $e->getMessage()], 411);
         }
     }
 
@@ -59,7 +59,6 @@ class DignityController extends Controller
             return new DignityResource($dignity);
         }
         return response()->json(['message' => 'Dignidad a elegir no encontrada'], 404);
-
     }
 
     /**
@@ -77,16 +76,18 @@ class DignityController extends Controller
             $dignity = Dignity::find($id);
             if ($dignity) {
                 $dignity->fill($request->all());
-                $dignity->saveOrFail();
+                if($dignity->saveOrFail()){
+                    $dignity->lists()->sync($request->get('lists'));
+                }
+
                 DB::commit();
                 return new DignityResource($dignity);
             }
             return response()->json(['message' => 'Dignidad a elegir no encontrada'], 404);
-        }catch(Exception $e) {
+        } catch (Exception $e) {
             DB::rollback();
-            return response()->json(['message' => 'Hubo un error al actualizar el la dignidad, intente nuevamente', 'details' => $e->getMessage()],411);
+            return response()->json(['message' => 'Hubo un error al actualizar el la dignidad, intente nuevamente', 'details' => $e->getMessage()], 411);
         }
-
     }
 
     /**
@@ -100,14 +101,13 @@ class DignityController extends Controller
         $dignity = Dignity::find($id);
 
 
-        if ($dignity->state) return response()->json(['message' => "Dignidad {$dignity->name} no puede ser eliminado por que esta activo"],200);
+        if ($dignity->state) return response()->json(['message' => "Dignidad {$dignity->name} no puede ser eliminado por que esta activo"], 200);
 
         if ($dignity) {
             $dignityName =  $dignity->name;
-            if($dignity->delete())
-                return response()->json(['message' => "Dignidad {$dignityName} eliminado  Correctamente"],200);
+            if ($dignity->delete())
+                return response()->json(['message' => "Dignidad {$dignityName} eliminado  Correctamente"], 200);
         }
         return response()->json(['message' => 'Dignidad no encontrado'], 404);
-
     }
 }
