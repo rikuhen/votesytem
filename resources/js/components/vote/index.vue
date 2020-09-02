@@ -6,22 +6,22 @@
       icon="edit"
     ></content-header-component>
     <content-main-content-component>
-      <b-col lg="4" sm="6" v-for="candidate in candidates" :key="candidate.id">
+      <b-col lg="4" sm="6" v-for="dignity in dignities" :key="dignity.id">
         <div class="card social-card">
           <div class="card-body text-center">
             <h3 class="text-facebook m-b-20">
               <feather type="edit"></feather>
             </h3>
-            <h4 class="text-facebook f-w-700">{{candidate.description}}</h4>
+            <h4 class="text-facebook f-w-700">{{dignity.name}}</h4>
           </div>
           <div class="card-footer">
             <b-row>
               <b-col md="6" sm="12">
-                <b-button @click="showMessageForVote(candidate)" block variant="primary">
+                <b-button @click="showMessageForVote(dignity)" block variant="primary">
                   <feather type="thumbs-up" size="13px"></feather>Votar
                 </b-button>
               </b-col>
-              <b-col md="6" sm="12" v-if="candidate.type == 'candidate'">
+              <b-col md="6" sm="12" v-if="dignity.type">
                 <b-button
                   variant="info"
                   size="md"
@@ -68,16 +68,16 @@ export default {
   },
   data() {
     return {
-      candidates: [],
+      dignities: [],
       membersOnModal: []
     };
   },
   methods: {
-    async loadCandidates() {
-      const menus = await axios.get("/api/candidates", {
+    async loadDignities() {
+      const promise = await axios.get("/api/dignities", {
         headers: { Authorization: "Bearer " + localStorage.getItem("token") }
       });
-      return menus.data.data;
+      return promise.data.data;
     },
 
     showMessageForVote(candidate) {
@@ -149,7 +149,7 @@ export default {
     }
   },
   mounted() {
-    this.loadCandidates().then(data => (this.candidates = data));
+    this.loadDignities().then(data => (this.dignities = data));
   }
 };
 </script>

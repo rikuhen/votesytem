@@ -7,8 +7,8 @@
     <div class="navbar-wrapper">
       <div class="navbar-logo" logo-theme="theme1">
         <!-- TODO LOGO -->
-        <b-link :to="{name:'vote'}" go>
-          <img src="./../../../../images/logo.svg" class="mx-auto w-100 img-fluid" />
+        <b-link :to="{name:'vote'}" go class="text-left">
+          <img src="./../../../../images/logo.svg" class="mx-auto logo-img" />
         </b-link>
 
         <a
@@ -48,27 +48,31 @@ export default {
   data() {
     return {
       showMobileMenuComponent: false,
-      showMobileUserProfile: false
+      showMobileUserProfile: false,
     };
   },
   props: {
     user: {
       type: Object,
-      default: {}
-    }
+      default: {},
+    },
   },
   components: {
-    UserProfile
+    UserProfile,
   },
   methods: {
     emitEventForMobileMenu() {
       this.$root.$emit("toggle-mobile-menu", this.showMobileMenuComponent);
-    }
-  }
+    },
+  },
 };
 </script>
 
 <style scoped>
+.header-navbar .navbar-wrapper .navbar-logo a img {
+    width: 34% !important;
+  }
+
 @media only screen and (max-width: 992px) {
   .header-navbar .navbar-wrapper .navbar-logo a img {
     width: 8% !important;

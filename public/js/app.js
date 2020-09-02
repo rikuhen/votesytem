@@ -1623,28 +1623,28 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   },
   data: function data() {
     return {
-      candidates: [],
+      dignities: [],
       membersOnModal: []
     };
   },
   methods: {
-    loadCandidates: function loadCandidates() {
+    loadDignities: function loadDignities() {
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
-        var menus;
+        var promise;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
                 _context.next = 2;
-                return axios__WEBPACK_IMPORTED_MODULE_1___default.a.get("/api/candidates", {
+                return axios__WEBPACK_IMPORTED_MODULE_1___default.a.get("/api/dignities", {
                   headers: {
                     Authorization: "Bearer " + localStorage.getItem("token")
                   }
                 });
 
               case 2:
-                menus = _context.sent;
-                return _context.abrupt("return", menus.data.data);
+                promise = _context.sent;
+                return _context.abrupt("return", promise.data.data);
 
               case 4:
               case "end":
@@ -1751,8 +1751,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   mounted: function mounted() {
     var _this3 = this;
 
-    this.loadCandidates().then(function (data) {
-      return _this3.candidates = data;
+    this.loadDignities().then(function (data) {
+      return _this3.dignities = data;
     });
   }
 });
@@ -18046,7 +18046,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/c
 
 
 // module
-exports.push([module.i, "\n@media only screen and (max-width: 992px) {\n.header-navbar .navbar-wrapper .navbar-logo a img[data-v-75fcbfd2] {\n    width: 8% !important;\n}\n}\n", ""]);
+exports.push([module.i, "\n.header-navbar .navbar-wrapper .navbar-logo a img[data-v-75fcbfd2] {\n    width: 34% !important;\n}\n@media only screen and (max-width: 992px) {\n.header-navbar .navbar-wrapper .navbar-logo a img[data-v-75fcbfd2] {\n    width: 8% !important;\n}\n}\n", ""]);
 
 // exports
 
@@ -48607,12 +48607,19 @@ var render = function() {
           "div",
           { staticClass: "navbar-logo", attrs: { "logo-theme": "theme1" } },
           [
-            _c("b-link", { attrs: { to: { name: "vote" }, go: "" } }, [
-              _c("img", {
-                staticClass: "mx-auto w-100 img-fluid",
-                attrs: { src: __webpack_require__(/*! ./../../../../images/logo.svg */ "./resources/images/logo.svg") }
-              })
-            ]),
+            _c(
+              "b-link",
+              {
+                staticClass: "text-left",
+                attrs: { to: { name: "vote" }, go: "" }
+              },
+              [
+                _c("img", {
+                  staticClass: "mx-auto logo-img",
+                  attrs: { src: __webpack_require__(/*! ./../../../../images/logo.svg */ "./resources/images/logo.svg") }
+                })
+              ]
+            ),
             _vm._v(" "),
             _c(
               "a",
@@ -48956,10 +48963,10 @@ var render = function() {
       _c(
         "content-main-content-component",
         [
-          _vm._l(_vm.candidates, function(candidate) {
+          _vm._l(_vm.dignities, function(dignity) {
             return _c(
               "b-col",
-              { key: candidate.id, attrs: { lg: "4", sm: "6" } },
+              { key: dignity.id, attrs: { lg: "4", sm: "6" } },
               [
                 _c("div", { staticClass: "card social-card" }, [
                   _c("div", { staticClass: "card-body text-center" }, [
@@ -48971,7 +48978,7 @@ var render = function() {
                     ),
                     _vm._v(" "),
                     _c("h4", { staticClass: "text-facebook f-w-700" }, [
-                      _vm._v(_vm._s(candidate.description))
+                      _vm._v(_vm._s(dignity.name))
                     ])
                   ]),
                   _vm._v(" "),
@@ -48992,7 +48999,7 @@ var render = function() {
                                   attrs: { block: "", variant: "primary" },
                                   on: {
                                     click: function($event) {
-                                      return _vm.showMessageForVote(candidate)
+                                      return _vm.showMessageForVote(dignity)
                                     }
                                   }
                                 },
@@ -49008,7 +49015,7 @@ var render = function() {
                             1
                           ),
                           _vm._v(" "),
-                          candidate.type == "candidate"
+                          dignity.type
                             ? _c(
                                 "b-col",
                                 { attrs: { md: "6", sm: "12" } },
@@ -49025,7 +49032,7 @@ var render = function() {
                                       on: {
                                         click: function($event) {
                                           return _vm.showMembers(
-                                            candidate.members
+                                            _vm.candidate.members
                                           )
                                         }
                                       }

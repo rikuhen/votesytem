@@ -217,7 +217,7 @@ class LoginController extends Controller
             return response()->json(["message" => 'El sistema no se encuentra disponible en este momento'], 401);
         }
 
-        $user = User::select('name')
+        $user = User::selectRaw('upper(name) as name')
             ->where('identification', $request->get('identification'))
             ->first();
 

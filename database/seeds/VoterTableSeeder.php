@@ -13,7 +13,7 @@ class VoterTableSeeder extends Seeder
      */
     public function run()
     {
-        // factory(Voter::class,30)->create();
+
         $fileVoters = storage_path('app/public/voters.csv');
 
         if (file_exists($fileVoters)) {
@@ -37,6 +37,31 @@ class VoterTableSeeder extends Seeder
                 }
             }
             fclose($fileHandler);
+        } else {
+            Voter::create([
+                'identification' => '0926894544',
+                'name' => 'Jorge Luis Veliz Berzosa',
+                'email' => 'jorgeconsalvacion@gmail.com',
+                // 'password' => Hash::make('password'), // password
+                'role' => 'voter',
+                'enabled' => 1,
+                'observation' => 'no-notificated'
+            ]);
+
+            Voter::create([
+                'identification' => '0952214468',
+                'name' => 'Karen Mariuxi Pachedo Delgado',
+                'email' => 'karen-pd@hotmail.com',
+                // 'password' => Hash::make('password'), // password
+                'role' => 'voter',
+                'enabled' => 1,
+                'observation' => 'no-notificated'
+            ]);
+
+            // factory(Voter::class,30)->create();
+
+
+
         }
     }
 }
