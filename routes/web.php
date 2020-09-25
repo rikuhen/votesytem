@@ -10,7 +10,11 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('report-voters','PrintReporterController@getTotalVoters');
-Route::get('report-results','PrintReporterController@getTotalResults');
+Route::get('report-voters', 'PrintReporterController@getTotalVoters');
+Route::get('report-results', 'PrintReporterController@getTotalResults');
 
-Route::any("{any}",'SpaController@index')->where('any','.*');
+Route::get('/','Auth\LoginController@showLoginForm')->middleware('guest');
+
+//Route::any("{any}", 'SpaController@index')->where('any', '.*');
+
+

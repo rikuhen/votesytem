@@ -193,7 +193,7 @@ class LoginController extends Controller
         $appAvailableUntil = Carbon::parse(config('votes.app-available-until'));
         $now = Carbon::now();
 
-        dd($now);
+        
         if ($now->between($appAvailableFrom, $appAvailableUntil)) {
             dd("entra");
             return true;

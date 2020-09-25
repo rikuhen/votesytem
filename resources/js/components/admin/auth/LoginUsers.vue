@@ -2,7 +2,10 @@
   <div>
     <b-form class="md-float-material form-material" @submit="doLogin">
       <div class="text-center">
-        <img src="./../../../../images/logo.svg" class="img-fluid login-logo-img" />
+        <img
+          src="./../../../../images/logo.svg"
+          class="img-fluid login-logo-img"
+        />
       </div>
       <div class="card auth-box">
         <div class="card-block">
@@ -11,7 +14,9 @@
               <h3 class="text-center txt-primary">Ingreso</h3>
             </b-col>
             <b-col md="12">
-              <p class="text-muted text-center p-b-5">Ingrese su correo y contraseña</p>
+              <p class="text-muted text-center p-b-5">
+                Ingrese su correo y contraseña
+              </p>
             </b-col>
           </b-row>
           <b-alert
@@ -20,7 +25,8 @@
             dismissible
             variant="danger"
             class="background-danger"
-          >{{error}}</b-alert>
+            >{{ error }}</b-alert
+          >
 
           <b-form-group class="form-primary" label-for="username">
             <b-form-input
@@ -29,7 +35,7 @@
               v-model="form.username"
               trim
               required
-              :class="{'fill': fStates.username || form.username}"
+              :class="{ fill: fStates.username || form.username }"
               @focus="fStates.username = true"
               @blur="fStates.username = false"
               :disabled="fStates.isSubmiting"
@@ -46,7 +52,7 @@
               v-model="form.password"
               trim
               required
-              :class="{'fill': fStates.password || form.password}"
+              :class="{ fill: fStates.password || form.password }"
               @focus="fStates.password = true"
               @blur="fStates.password = false"
               :disabled="fStates.isSubmiting"
@@ -57,7 +63,12 @@
 
           <b-row class="m-t-30">
             <b-col md="12">
-              <b-button :disabled="fStates.isSubmiting" type="submit" variant="primary" block>
+              <b-button
+                :disabled="fStates.isSubmiting"
+                type="submit"
+                variant="primary"
+                block
+              >
                 <span v-if="!fStates.isSubmiting">INGRESAR</span>
                 <feather
                   v-if="fStates.isSubmiting"
@@ -76,6 +87,7 @@
 </template>
 
 <script>
+import { AuthService } from "./../../../services/AuthService";
 export default {
   name: "LoginUsers",
   data() {
@@ -83,15 +95,15 @@ export default {
       form: {
         username: "",
         password: "",
-        is_voter: true
+        is_voter: true,
       },
       error: "",
       hasError: false,
       fStates: {
         username: false,
         password: false,
-        isSubmiting: false
-      }
+        isSubmiting: false,
+      },
     };
   },
 
@@ -104,18 +116,21 @@ export default {
       e.stopPropagation();
       this.fStates.isSubmiting = true;
       this.hasError = false;
-      let promise = this.$store.dispatch("retrieveToken", {
-        username: this.form.username,
-        password: this.form.password
-      });
-      promise
-        .then(response => {
-          this.$store.dispatch("getUser").then(result => {
+      let service = new AuthService();
+
+      service
+        .doLogin({
+          username: this.form.username,
+          password: this.form.password,
+        })
+        .then((response) => {
+          console.log(response);
+          /*this.$store.dispatch("getUser").then((result) => {
             this.$store.commit("SET_LAYOUT", "app-layout");
             this.$router.push({ name: "admin-dashboard" });
-          });
+          });*/
         })
-        .catch(exception => {
+        .catch((exception) => {
           let response = exception.response;
           let status = response.status;
           if (status == 422) {
@@ -128,8 +143,8 @@ export default {
           this.setFocusPassword();
         })
         .then(() => (this.fStates.isSubmiting = false));
-    }
-  }
+    },
+  },
 };
 </script>
 
